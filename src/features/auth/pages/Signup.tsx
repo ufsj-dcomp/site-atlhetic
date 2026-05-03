@@ -1,9 +1,23 @@
 import { useState } from "react";
 import { registerUser } from "../services/authService";
 import "./Signup.css";
+import { FirebaseError } from "firebase/app";
+
+
 
 function getErrorMessage(error: unknown): string {
-  if (error instanceof Error) return error.message;
+  if (error instanceof FirebaseError) {
+    switch (error.code) {
+      case "auth/email-already-in-use":
+        return "Este email já está cadastrado.";
+      case "auth/invalid-email":
+        return "Email inválido.";
+      case "auth/weak-password":
+        return "A senha deve ter no mínimo 6 caracteres.";
+      default:
+        return "Erro ao cadastrar usuário.";
+    }
+  }
   return "Erro ao cadastrar usuário.";
 }
 
