@@ -1,5 +1,8 @@
 import { auth, db } from "../../../lib/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 export async function registerUser(
@@ -25,4 +28,9 @@ export async function registerUser(
   });
 
   return user;
+}
+
+export async function signInUser(email: string, password: string) {
+  const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  return userCredential.user;
 }
