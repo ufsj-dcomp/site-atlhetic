@@ -1,12 +1,24 @@
 import { useState } from "react";
 import { signInUser } from "../services/authService";
 import "./Signin.css";
+import { FirebaseError } from "firebase/app";
+
 
 function getErrorMessage(error: unknown): string {
-  if (error instanceof Error) return error.message;
+  if (error instanceof FirebaseError) {
+    switch (error.code) {
+      case "auth/invalid-credential":
+        return "Email ou senha incorretos.";
+      case "auth/user-not-found":
+        return "Usuário não encontrado.";
+      case "auth/wrong-password":
+        return "Senha incorreta.";
+      default:
+        return "Erro ao fazer login.";
+    }
+  }
   return "Erro ao fazer login.";
 }
-
 type MessageType = "error" | "success" | "";
 
 export default function Signin() {
