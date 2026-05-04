@@ -4,6 +4,8 @@ import Home from "../pages/Home";
 import Signup from "../features/auth/pages/Signup";
 import Signin from "../features/auth/pages/Signin";
 import PrivateRoute from "../features/auth/components/PrivateRoute";
+import Profile from "../features/users/pages/Profile";
+
 
 export default function AppRoutes() {
   return (
@@ -16,6 +18,11 @@ export default function AppRoutes() {
       } />
       <Route path="/cadastro" element={<Signup />} />
       <Route path="/login" element={<Signin />} />
+      <Route path="/perfil" element={
+        <PrivateRoute>
+          <Profile />
+        </PrivateRoute>
+      } />
     </Routes>
   );
 }

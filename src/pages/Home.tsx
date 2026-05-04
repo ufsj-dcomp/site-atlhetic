@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Home() {
   return (
     <>
@@ -180,7 +182,9 @@ export default function Home() {
           <div className="menu-item active">Home</div>
           <div className="menu-item">Notícias</div>
           <div className="menu-item">Jogos</div>
-          <div className="menu-item">Perfil</div>
+          <Link to="/perfil" className="menu-item" style={{ textDecoration: "none", color: "white" }}>
+            Perfil
+          </Link>
         </div>
 
         {/* CONTEÚDO */}
