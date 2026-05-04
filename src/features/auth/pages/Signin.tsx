@@ -2,7 +2,7 @@ import { useState } from "react";
 import { signInUser } from "../services/authService";
 import "./Signin.css";
 import { FirebaseError } from "firebase/app";
-
+import { useNavigate } from "react-router-dom";
 
 function getErrorMessage(error: unknown): string {
   if (error instanceof FirebaseError) {
@@ -27,6 +27,7 @@ export default function Signin() {
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState<MessageType>("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -35,6 +36,7 @@ export default function Signin() {
     try {
       setLoading(true);
       await signInUser(email, password);
+      navigate("/home");
       setMessage("Login realizado com sucesso!");
       setMessageType("success");
       setEmail("");
