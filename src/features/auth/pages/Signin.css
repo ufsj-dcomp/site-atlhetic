@@ -98,6 +98,21 @@
   font: inherit;
 }
 
+.forgot-btn {
+  background: none;
+  border: none;
+  color: #111;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  text-align: right;
+}
+
+.forgot-btn:hover {
+  text-decoration: underline;
+}
+
 .primary-btn,
 .google-btn {
   height: 44px;

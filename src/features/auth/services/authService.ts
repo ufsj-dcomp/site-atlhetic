@@ -2,8 +2,13 @@ import { auth, db } from "../../../lib/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+
+export async function resetPassword(email: string) {
+  await sendPasswordResetEmail(auth, email);
+}
 
 export async function registerUser(
   name: string,
