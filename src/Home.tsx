@@ -1,3 +1,5 @@
+import Sidebar from "./sidebar";
+
 export default function Home() {
   return (
     <>
@@ -9,46 +11,16 @@ export default function Home() {
           background: #f5f5f5;
         }
 
-        /* LAYOUT */
         .layout {
-          position: relative;
-        }
-
-        /* SIDEBAR */
-        .sidebar {
-          width: 240px;
-          background: black;
-          color: white;
-          height: 100vh;
-          padding: 20px;
-          position: fixed;
-          top: 0;
-          left: 0;
-        }
-
-        .sidebar h2 {
-          margin-bottom: 30px;
-        }
-
-        .menu-item {
           display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 10px;
-          margin-bottom: 10px;
-          border-radius: 8px;
-          cursor: pointer;
         }
 
-        .menu-item.active {
-          background: #1F6E3C;
-          font-weight: bold;
-        }
 
         /* CONTEÚDO */
         .content {
           margin-left: 240px;
-          padding: 20px 60px;
+          padding: 30px 60px;
+          flex: 1;
         }
 
         /* SEARCH */
@@ -59,6 +31,7 @@ export default function Home() {
           border: none;
           background: #eee;
           margin-bottom: 20px;
+          box-sizing: border-box;
         }
 
         /* BANNER */
@@ -87,13 +60,6 @@ export default function Home() {
           left: 20px;
           color: white;
           z-index: 2;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-        }
-
-        .banner-content h2 {
-          margin: 5px 0;
         }
 
         .tag {
@@ -104,7 +70,6 @@ export default function Home() {
           display: inline-block;
         }
 
-        /* TÍTULO */
         .section-title {
           margin-top: 30px;
           margin-bottom: 15px;
@@ -113,7 +78,6 @@ export default function Home() {
           align-items: center;
         }
 
-        /* GRID */
         .news-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -150,7 +114,6 @@ export default function Home() {
           margin: 0;
         }
 
-        /* RESPONSIVO */
         @media (max-width: 768px) {
           .sidebar {
             display: none;
@@ -158,7 +121,7 @@ export default function Home() {
 
           .content {
             margin-left: 0;
-            padding: 15px;
+            padding: 20px;
           }
 
           .news-grid {
@@ -173,31 +136,23 @@ export default function Home() {
       </style>
 
       <div className="layout">
-        {/* SIDEBAR */}
-        <div className="sidebar">
-          <h2 style={{ color: "white"}}>Athletic Clube</h2>
+        <Sidebar />
 
-          <div className="menu-item active">Home</div>
-          <div className="menu-item">Notícias</div>
-          <div className="menu-item">Jogos</div>
-          <div className="menu-item">Perfil</div>
-        </div>
-
-        {/* CONTEÚDO */}
         <div className="content">
-        
+          <input
+            className="search"
+            placeholder="Buscar notícias, jogos..."
+          />
 
-          {/* BANNER */}
           <div className="banner">
             <img src="/titulo.jpeg" alt="banner" />
             <div className="banner-content">
               <div className="tag">Destaque</div>
-              <h2  style={{ color: "white"}}>Athletic vence mais uma no campeonato</h2>
+              <h2 style={{ color: "white" }}>Athletic vence mais uma no campeonato</h2>
               <span>07 Abr 2026</span>
             </div>
           </div>
 
-          {/* TÍTULO */}
           <div className="section-title">
             <h3>Últimas Notícias</h3>
             <span style={{ color: "#1F6E3C", cursor: "pointer" }}>
@@ -205,7 +160,6 @@ export default function Home() {
             </span>
           </div>
 
-          {/* NOTÍCIAS */}
           <div className="news-grid">
             <div className="card">
               <img src="/noticia1.jpg" alt="" />
