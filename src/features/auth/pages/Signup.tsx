@@ -2,7 +2,7 @@ import { useState } from "react";
 import { registerUser } from "../services/authService";
 import "./Signup.css";
 import { FirebaseError } from "firebase/app";
-
+import { useNavigate } from "react-router-dom";
 
 
 function getErrorMessage(error: unknown): string {
@@ -32,6 +32,7 @@ export default function Signup() {
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState<MessageType>("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -52,6 +53,7 @@ export default function Signup() {
     try {
       setLoading(true);
       await registerUser(name, email, password);
+      navigate("/login");
       setMessage("Cadastro realizado com sucesso!");
       setMessageType("success");
       setName("");
