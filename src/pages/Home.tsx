@@ -1,4 +1,4 @@
-import Sidebar from "./pages/Sidebar";
+import Sidebar from "./Sidebar";
 
 export default function Home() {
   return (
@@ -14,7 +14,6 @@ export default function Home() {
         .layout {
           display: flex;
         }
-
 
         /* CONTEÚDO */
         .content {
@@ -60,6 +59,13 @@ export default function Home() {
           left: 20px;
           color: white;
           z-index: 2;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .banner-content h2 {
+          margin: 5px 0;
         }
 
         .tag {
@@ -115,10 +121,6 @@ export default function Home() {
         }
 
         @media (max-width: 768px) {
-          .sidebar {
-            display: none;
-          }
-
           .content {
             margin-left: 0;
             padding: 20px;

@@ -118,8 +118,8 @@ export default function Sidebar() {
       <div className="sidebar">
         <h2>Athletic Clube</h2>
 
-        <a href="/" style={{ textDecoration: "none" }}>
-          <div className={`menu-item ${currentPath === "/" ? "active" : ""}`}>
+        <a href="/home" style={{ textDecoration: "none" }}>
+          <div className={`menu-item ${currentPath === "/home" ? "active" : ""}`}>
             <span>🏠</span>
             <span>Home</span>
           </div>
