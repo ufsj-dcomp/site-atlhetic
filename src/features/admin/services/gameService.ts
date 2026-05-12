@@ -7,10 +7,11 @@ export const createGame = async (gameData: GameData) => {
     const docRef = await addDoc(collection(db, 'games'), {
       ...gameData,
       createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(), 
     });
     return docRef.id;
   } catch (error) {
     console.error("Erro ao cadastrar jogo: ", error);
-    throw error; // Repassa o erro para o frontend tratar
+    throw error;
   }
 };

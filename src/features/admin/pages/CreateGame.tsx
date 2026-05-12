@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import { createGame } from '../services/gameService';
 import type { GameData } from '../types/game';
-import { FaTrophy, FaCalendarAlt, FaMapMarkerAlt, FaRunning, FaPlus } from 'react-icons/fa';
-import './CreateGame.css'; // Importando o visual
+import { FaTrophy, FaCalendarAlt, FaMapMarkerAlt, FaUserShield, FaPlus } from 'react-icons/fa';
+import './CreateGame.css'; 
 
 export function CreateGame() {
   const [formData, setFormData] = useState<GameData>({
     title: '',
-    date: '',
+    dateTime: '',
     location: '',
-    category: 'futebol',
+    opponent: '', 
   });
   
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<{ type: 'success' | 'error' | ''; message: string }>({ type: '', message: '' });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -27,7 +27,8 @@ export function CreateGame() {
     try {
       await createGame(formData);
       setStatus({ type: 'success', message: 'Jogo cadastrado com sucesso!' });
-      setFormData({ title: '', date: '', location: '', category: 'futebol' });
+      // Limpa os campos
+      setFormData({ title: '', dateTime: '', location: '', opponent: '' });
     } catch (error) {
       setStatus({ type: 'error', message: 'Erro ao cadastrar. Tente novamente.' });
     } finally {
@@ -56,7 +57,7 @@ export function CreateGame() {
         <form className="create-game-form" onSubmit={handleSubmit}>
           
           <label>
-            Título do Confronto
+            Título da Partida
             <div className="input-wrap">
               <div className="input-icon">
                 <FaTrophy />
@@ -64,8 +65,25 @@ export function CreateGame() {
               <input 
                 type="text" 
                 name="title" 
-                placeholder="Ex: Athletic X vs Time b"
+                placeholder='Ex: "Athletic x Cruzeiro"'
                 value={formData.title} 
+                onChange={handleChange} 
+                required 
+              />
+            </div>
+          </label>
+
+          <label>
+            Adversário
+            <div className="input-wrap">
+              <div className="input-icon">
+                <FaUserShield />
+              </div>
+              <input 
+                type="text" 
+                name="opponent" 
+                placeholder='Ex: "Cruzeiro"'
+                value={formData.opponent} 
                 onChange={handleChange} 
                 required 
               />
@@ -80,8 +98,8 @@ export function CreateGame() {
               </div>
               <input 
                 type="datetime-local" 
-                name="date" 
-                value={formData.date} 
+                name="dateTime" 
+                value={formData.dateTime} 
                 onChange={handleChange} 
                 required 
               />
@@ -97,7 +115,7 @@ export function CreateGame() {
               <input 
                 type="text" 
                 name="location" 
-                placeholder="Ex: Quadra Principal"
+                placeholder='Ex: "Arena Sicred"'
                 value={formData.location} 
                 onChange={handleChange} 
                 required 

@@ -1,6 +1,6 @@
 export interface GameData {
   title: string;
-  date: string;
+  dateTime: string;
   location: string;
-  category: string;
+  opponent: string;
 }
