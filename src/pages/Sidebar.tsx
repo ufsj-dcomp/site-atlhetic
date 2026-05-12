@@ -1,14 +1,16 @@
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
 
 export default function Sidebar() {
   const location = useLocation();
   const currentPath = location.pathname;
 
+  const [open, setOpen] = useState(false);
+
   return (
     <>
       <style>
         {`
-          /* ESTILOS DA SIDEBAR */
           .sidebar {
             width: 240px;
             background: #0a0a0a;
@@ -20,7 +22,7 @@ export default function Sidebar() {
             display: flex;
             flex-direction: column;
             z-index: 100;
-            transition: all 0.3s ease;
+            transition: 0.3s;
           }
 
           .sidebar h2 {
@@ -57,104 +59,170 @@ export default function Sidebar() {
             font-weight: 500;
           }
 
-          /* RESPONSIVO: em telas pequenas, sidebar vira barra inferior */
+          /* BOTÃO HAMBURGUER */
+          .menu-button {
+            display: none;
+          }
+
+          /* FUNDO ESCURO */
+          .overlay {
+            display: none;
+          }
+
+          /* MOBILE */
           @media (max-width: 768px) {
-            .sidebar {
-              width: 100%;
-              height: auto;
+
+            .menu-button {
+              display: flex;
+
               position: fixed;
-              bottom: 0;
-              top: auto;
-              left: 0;
-              right: 0;
-              background: #0a0a0a;
-              padding: 8px 12px;
-              flex-direction: row;
-              justify-content: space-around;
-              border-top: 1px solid #222;
-              box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+              top: 16px;
+              right: 16px;
+
+              width: 42px;
+              height: 42px;
+
+              background: #111;
+              color: white;
+
+              border-radius: 10px;
+
+              align-items: center;
+              justify-content: center;
+
+              font-size: 22px;
+
+              z-index: 300;
+
+              cursor: pointer;
+            }
+
+            .overlay {
+              display: block;
+
+              position: fixed;
+              inset: 0;
+
+              background: rgba(0,0,0,0.4);
+
+              opacity: ${open ? 1 : 0};
+              pointer-events: ${open ? "all" : "none"};
+
+              transition: 0.3s;
+
+              z-index: 150;
+            }
+
+            .sidebar {
+              transform: ${
+                open
+                  ? "translateX(0)"
+                  : "translateX(-100%)"
+              };
+
+              width: 220px;
+
+              z-index: 200;
             }
 
             .sidebar h2 {
-              display: none;
-            }
-
-            .menu-item {
-              flex-direction: column;
-              padding: 8px 12px;
-              gap: 4px;
-              font-size: 11px;
-              margin-bottom: 0;
-              border-radius: 8px;
-              text-align: center;
-            }
-
-            .menu-item span:first-child {
-              font-size: 20px;
-            }
-
-            /* Ajuste para o conteúdo não ficar escondido atrás da sidebar no mobile */
-            .content {
-              margin-left: 0 !important;
-              margin-bottom: 70px !important;
-              padding: 20px !important;
-            }
-          }
-
-          /* Ajuste para telas muito pequenas */
-          @media (max-width: 480px) {
-            .menu-item {
-              padding: 6px 8px;
-              font-size: 10px;
-            }
-            
-            .menu-item span:first-child {
-              font-size: 18px;
+              margin-top: 20px;
             }
           }
         `}
       </style>
 
+      {/* BOTÃO */}
+      <div
+        className="menu-button"
+        onClick={() => setOpen(true)}
+      >
+        ☰
+      </div>
+
+      {/* OVERLAY */}
+      <div
+        className="overlay"
+        onClick={() => setOpen(false)}
+      />
+
+      {/* SIDEBAR */}
       <div className="sidebar">
         <h2>Athletic Clube</h2>
 
         <a href="/home" style={{ textDecoration: "none" }}>
-          <div className={`menu-item ${currentPath === "/home" ? "active" : ""}`}>
+          <div
+            className={`menu-item ${
+              currentPath === "/home"
+                ? "active"
+                : ""
+            }`}
+          >
             <span>🏠</span>
             <span>Home</span>
           </div>
         </a>
 
         <a href="/noticias" style={{ textDecoration: "none" }}>
-          <div className={`menu-item ${currentPath === "/noticias" ? "active" : ""}`}>
+          <div
+            className={`menu-item ${
+              currentPath === "/noticias"
+                ? "active"
+                : ""
+            }`}
+          >
             <span>📰</span>
             <span>Notícias</span>
           </div>
         </a>
 
         <a href="/jogos" style={{ textDecoration: "none" }}>
-          <div className={`menu-item ${currentPath === "/jogos" ? "active" : ""}`}>
+          <div
+            className={`menu-item ${
+              currentPath === "/jogos"
+                ? "active"
+                : ""
+            }`}
+          >
             <span>⚽</span>
             <span>Jogos</span>
           </div>
         </a>
 
         <a href="/loja" style={{ textDecoration: "none" }}>
-          <div className={`menu-item ${currentPath === "/loja" ? "active" : ""}`}>
+          <div
+            className={`menu-item ${
+              currentPath === "/loja"
+                ? "active"
+                : ""
+            }`}
+          >
             <span>🛒</span>
             <span>Loja</span>
           </div>
         </a>
 
         <a href="/ingressos" style={{ textDecoration: "none" }}>
-          <div className={`menu-item ${currentPath === "/ingressos" ? "active" : ""}`}>
+          <div
+            className={`menu-item ${
+              currentPath === "/ingressos"
+                ? "active"
+                : ""
+            }`}
+          >
             <span>🎫</span>
             <span>Ingressos</span>
           </div>
         </a>
 
         <a href="/perfil" style={{ textDecoration: "none" }}>
-          <div className={`menu-item ${currentPath === "/perfil" ? "active" : ""}`}>
+          <div
+            className={`menu-item ${
+              currentPath === "/perfil"
+                ? "active"
+                : ""
+            }`}
+          >
             <span>👤</span>
             <span>Perfil</span>
           </div>
