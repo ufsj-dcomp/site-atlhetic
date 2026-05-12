@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
 export default function Jogos() {
   const [busca, setBusca] = useState("");
+  const navigate = useNavigate();
 
   const jogos = [
     {
+      id: 1,
       adversario: "FC Unidos",
       data: "08/05/2026",
       hora: "16:00",
@@ -13,34 +16,40 @@ export default function Jogos() {
       destaque: true,
     },
     {
+      id: 2,
       adversario: "Sporting Cidade",
       data: "15/05/2026",
       hora: "18:30",
       local: "Estádio Municipal",
     },
     {
+      id: 3,
       adversario: "Atlético Estrela",
       data: "22/05/2026",
       hora: "20:00",
       local: "Estádio Municipal",
     },
     {
+      id: 4,
       adversario: "FC Campinas",
       data: "29/05/2026",
       hora: "17:00",
       local: "Estádio Municipal",
     },
     {
+      id: 5,
       adversario: "Real FC",
       data: "05/06/2026",
       hora: "19:00",
-      local: "Estádio Municipalo",
+      local: "Estádio Municipal",
     },
   ];
 
-  // FILTRO para verificar se o nome pesquisado contém nos próximos jogos
+  // FILTRO
   const jogosFiltrados = jogos.filter((jogo) =>
-    jogo.adversario.toLowerCase().includes(busca.toLowerCase())
+    jogo.adversario
+      .toLowerCase()
+      .includes(busca.toLowerCase())
   );
 
   return (
@@ -56,7 +65,6 @@ export default function Jogos() {
         .layout {
           display: flex;
         }
-
 
         /* CONTEÚDO */
         .content {
@@ -85,14 +93,14 @@ export default function Jogos() {
           background: #e0e0e0;
         }
 
-        /* RESULTADO DA BUSCA */
+        /* RESULTADO */
         .resultado-busca {
           font-size: 14px;
           color: #666;
           margin-bottom: 15px;
         }
 
-        /* CARD JOGO */
+        /* CARD */
         .game-card {
           background: white;
           border-radius: 12px;
@@ -102,6 +110,12 @@ export default function Jogos() {
           justify-content: space-between;
           align-items: center;
           box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+          cursor: pointer;
+          transition: 0.2s;
+        }
+
+        .game-card:hover {
+          transform: translateY(-2px);
         }
 
         .game-card.highlight {
@@ -189,48 +203,87 @@ export default function Jogos() {
             type="text"
             placeholder="Buscar Jogos"
             value={busca}
-            onChange={(e) => setBusca(e.target.value)}
+            onChange={(e) =>
+              setBusca(e.target.value)
+            }
           />
 
           {busca && (
             <div className="resultado-busca">
-              🔍 Mostrando resultados para: <strong>"{busca}"</strong>
+              🔍 Mostrando resultados para:
+              <strong> "{busca}"</strong>
             </div>
           )}
 
           {jogosFiltrados.length === 0 ? (
             <div className="sem-resultados">
-              ⚽ Nenhum jogo encontrado para "{busca}"
+              ⚽ Nenhum jogo encontrado para "
+              {busca}"
             </div>
           ) : (
             jogosFiltrados.map((jogo, index) => (
               <div
                 key={index}
-                className={`game-card ${jogo.destaque ? "highlight" : ""}`}
+                className={`game-card ${
+                  jogo.destaque ? "highlight" : ""
+                }`}
+                onClick={() =>
+                  navigate(`/jogo/${jogo.id}`)
+                }
               >
                 <div>
                   {jogo.destaque && (
-                    <div className="badge">Próximo Jogo</div>
+                    <div className="badge">
+                      Próximo Jogo
+                    </div>
                   )}
 
                   <div className="left">
                     <div className="logo">AC</div>
 
                     <div>
-                      <strong>Athletic Clube</strong>
-                      <p style={{ margin: 0, fontSize: 12, color: "#666" }}>
+                      <strong>
+                        Athletic Clube
+                      </strong>
+
+                      <p
+                        style={{
+                          margin: 0,
+                          fontSize: 12,
+                          color: "#666",
+                        }}
+                      >
                         {jogo.local}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="middle">VS</div>
+                <div className="middle">
+                  VS
+                </div>
 
                 <div className="right">
-                  <strong>{jogo.adversario}</strong>
-                  <p style={{ margin: "5px 0 0 0", fontSize: 13 }}>{jogo.data}</p>
-                  <p style={{ margin: "2px 0 0 0", fontSize: 13, color: "#666" }}>
+                  <strong>
+                    {jogo.adversario}
+                  </strong>
+
+                  <p
+                    style={{
+                      margin: "5px 0 0 0",
+                      fontSize: 13,
+                    }}
+                  >
+                    {jogo.data}
+                  </p>
+
+                  <p
+                    style={{
+                      margin: "2px 0 0 0",
+                      fontSize: 13,
+                      color: "#666",
+                    }}
+                  >
                     {jogo.hora}
                   </p>
                 </div>
