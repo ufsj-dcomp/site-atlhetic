@@ -157,9 +157,12 @@ export default function Home() {
 
           <div className="section-title">
             <h3>Últimas Notícias</h3>
-            <span style={{ color: "#1F6E3C", cursor: "pointer" }}>
-              Ver todas
-            </span>
+            
+            <a href="/noticias" style={{ textDecoration: "none" }}>
+              <span style={{ color: "#1F6E3C", cursor: "pointer" }}>
+                Ver todas
+              </span>
+            </a>
           </div>
 
           <div className="news-grid">
