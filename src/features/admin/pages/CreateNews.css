@@ -1,0 +1,147 @@
+.create-news-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.create-news-card {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  color: #111;
+}
+
+.create-news-brand {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.create-news-logo {
+  background-color: #111;
+  color: #fff;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin: 0 auto 1rem;
+}
+
+.create-news-brand h1 {
+  font-size: 1.8rem;
+  margin: 0;
+  color: #111;
+}
+
+.create-news-brand p {
+  color: #666;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.create-news-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.create-news-form label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.textarea-wrap {
+  align-items: flex-start; 
+}
+
+.textarea-wrap .input-icon {
+  top: 1rem;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  color: #888;
+  display: flex;
+}
+
+.input-wrap input,
+.input-wrap textarea {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 3.5rem !important;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.input-wrap textarea {
+  resize: vertical; 
+}
+
+.input-wrap input:focus,
+.input-wrap textarea:focus {
+  border-color: #111;
+}
+
+.primary-btn {
+  background-color: #111;
+  color: #fff;
+  border: none;
+  padding: 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 1rem;
+}
+
+.primary-btn:hover {
+  background-color: #333;
+}
+
+.primary-btn:disabled {
+  background-color: #888;
+  cursor: not-allowed;
+}
+
+.feedback {
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.feedback.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.feedback.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}

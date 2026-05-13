@@ -10,6 +10,7 @@ import Profile from "../features/users/pages/Profile";
 import { CreateGame } from '../features/admin/pages/CreateGame';
 import { AdminHome } from '../features/admin/pages/AdminHome';
 import { ManageGames } from '../features/admin/pages/ManageGames';
+import { CreateNews } from '../features/admin/pages/CreateNews';
 
 
 export default function AppRoutes() {
@@ -51,6 +52,11 @@ export default function AppRoutes() {
       <Route path="/admin/gerenciar-jogos" element={
             <PrivateRoute>
                 <ManageGames />
+            </PrivateRoute>
+      } />
+      <Route path="/admin/cadastrar-noticias" element={
+            <PrivateRoute>
+                <CreateNews />
             </PrivateRoute>
       } />
     </Routes>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaPlus, FaEdit, FaUserShield } from 'react-icons/fa';
+import { FaPlus, FaEdit, FaUserShield, FaNewspaper } from 'react-icons/fa';
 import './AdminHome.css';
 
 export function AdminHome() {
@@ -26,9 +26,9 @@ export function AdminHome() {
     {
       id: 'publish-news',
       title: 'Publicar Novas Notícias',
-      description: 'Publique novos notícias sobre o Athletic Club',
-      icon: <FaPlus />,
-      path: '/admin/publicar-noticias',
+      description: 'Publique novas notícias sobre o Athletic Club',
+      icon: <FaNewspaper />,
+      path: '/admin/cadastrar-noticias',
       colorBg: '#b2b5b6ff', 
       colorIcon: '#1f1e1eff' 
     }
@@ -43,7 +43,7 @@ export function AdminHome() {
             <FaUserShield />
           </div>
           <h1>Painel Administrativo</h1>
-          <p>Gerencie as funcionalidades da atlética</p>
+          <p>Gerencie as funcionalidades do site</p>
         </div>
 
         <div className="admin-grid">
