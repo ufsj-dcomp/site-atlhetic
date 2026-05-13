@@ -1,0 +1,228 @@
+import Sidebar from "./Sidebar";
+
+export default function Loja() {
+  return (
+    <>
+      <style>
+        {`
+        body {
+          margin: 0;
+          font-family: Arial, sans-serif;
+          background: #f5f5f5;
+        }
+
+        .layout {
+          display: flex;
+        }
+
+        /* CONTEÚDO */
+        .content {
+          margin-left: 240px;
+          padding: 30px 60px;
+          flex: 1;
+        }
+
+        /* SEARCH */
+        .search {
+          width: 100%;
+          padding: 12px;
+          border-radius: 20px;
+          border: none;
+          background: #eee;
+          margin-bottom: 20px;
+          box-sizing: border-box;
+        }
+
+        /* BANNER */
+        .banner {
+          position: relative;
+          border-radius: 12px;
+          overflow: hidden;
+        }
+
+        .banner img {
+          width: 100%;
+          height: 320px;
+          object-fit: contain;
+        }
+
+        .banner::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+
+        .banner-content {
+          position: absolute;
+          bottom: 20px;
+          left: 20px;
+          color: white;
+          z-index: 2;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .banner-content h2 {
+          margin: 5px 0;
+        }
+
+        .tag {
+          background: #1F6E3C;
+          padding: 5px 10px;
+          border-radius: 10px;
+          font-size: 12px;
+          display: inline-block;
+        }
+
+        .section-title {
+          margin-top: 30px;
+          margin-bottom: 15px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .news-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 20px;
+        }
+
+        .card {
+          background: white;
+          border-radius: 12px;
+          overflow: hidden;
+          transition: 0.2s;
+        }
+
+        .card:hover {
+          transform: translateY(-3px);
+        }
+
+        .card img {
+          width: 100%;
+          height: 250px;
+          object-fit: contain;
+        }
+
+        .card-content {
+          padding: 12px;
+        }
+
+        .card-content span {
+          font-size: 12px;
+          color: gray;
+        }
+
+        h2, h3, p {
+          margin: 0;
+        }
+
+        @media (max-width: 768px) {
+          .content {
+            margin-left: 0;
+            padding: 20px;
+          }
+
+          .news-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .banner img {
+            height: 200px;
+          }
+        }
+        `}
+      </style>
+
+      <div className="layout">
+        <Sidebar />
+
+        <div className="content">
+          <input
+            className="search"
+            placeholder="Buscar produto..."
+          />
+
+          
+
+          <div className="section-title">
+            <h3>Produtos</h3>
+            <span style={{ color: "#1F6E3C", cursor: "pointer" }}>
+            </span>
+          </div>
+
+          <div className="news-grid">
+            <div className="card">
+              <img src="/camisa1.png" alt="" />
+              <div className="card-content">
+                <p>Camisa 1</p>
+                <button
+                    className="btn-produto"
+                    style={{
+                        backgroundColor: "green",
+                        color: "white",
+                        border: "none",
+                        padding: "10px 16px",
+                        borderRadius: "8px",
+                        cursor: "pointer"
+                    }}
+                    >
+                    Ver produto
+                </button>
+              </div>
+            </div>
+
+            <div className="card">
+              <img src="/camisa2.webp" alt="" />
+              <div className="card-content">
+                <p>Camisa 2</p>
+                <button
+                    className="btn-produto"
+                    style={{
+                        backgroundColor: "green",
+                        color: "white",
+                        border: "none",
+                        padding: "10px 16px",
+                        borderRadius: "8px",
+                        cursor: "pointer"
+                    }}
+                    >
+                    Ver produto
+                </button>
+              </div>
+            </div>
+
+
+            <div className="card">
+              <img src="/garrafa.webp" alt="" />
+              <div className="card-content">
+                <p>Garrafa Térmica 750ml </p>
+                <button
+                    className="btn-produto"
+                    style={{
+                        backgroundColor: "green",
+                        color: "white",
+                        border: "none",
+                        padding: "10px 16px",
+                        borderRadius: "8px",
+                        cursor: "pointer"
+                    }}
+                    >
+                    Ver produto
+                </button>
+              </div>
+            </div>
+
+
+            
+
+            
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
