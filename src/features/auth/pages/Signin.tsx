@@ -4,6 +4,10 @@ import "./Signin.css";
 import { FirebaseError } from "firebase/app";
 import { useNavigate } from "react-router-dom";
 
+//Adicionei os imports do banco de dados e da autenticação
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../../lib/firebase"; 
+
 function getErrorMessage(error: unknown): string {
   if (error instanceof FirebaseError) {
     switch (error.code) {
@@ -38,7 +42,30 @@ export default function Signin() {
     try {
       setLoading(true);
       await signInUser(email, password);
-      navigate("/home");
+
+      //Lógica para levar o usuário ao home certo
+      const user = auth.currentUser; 
+      
+      if (user) {
+        // Vai na coleção 'users', pega o documento com o ID do usuário logado
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+
+        if (userDocSnap.exists()) {
+          const userData = userDocSnap.data();
+          
+          // Verifica a role e manda pra rota certa
+          if (userData.role === "administrador") {
+            navigate("/admin");
+          } else {
+            navigate("/home"); // Se for torcedor, vai pro home normal
+          }
+        } else {
+          // Fallback: se o usuário logou mas não tem documento no banco, vai pro home
+          navigate("/home"); 
+        }
+      }
+
       setMessage("Login realizado com sucesso!");
       setMessageType("success");
       setEmail("");
@@ -52,24 +79,24 @@ export default function Signin() {
   }
 
   async function handleReset(e: React.SyntheticEvent<HTMLFormElement>) {
-  e.preventDefault();
-  setMessage("");
-  try {
-    setLoading(true);
-    await resetPassword(resetEmail);
-    setMessage("Email de recuperação enviado! Verifique sua caixa de entrada.");
-    setMessageType("success");
-  } catch (error: unknown) {
-    if (error instanceof FirebaseError && error.code === "auth/user-not-found") {
-      setMessage("Email não encontrado.");
-    } else {
-      setMessage("Erro ao enviar email de recuperação.");
+    e.preventDefault();
+    setMessage("");
+    try {
+      setLoading(true);
+      await resetPassword(resetEmail);
+      setMessage("Email de recuperação enviado! Verifique sua caixa de entrada.");
+      setMessageType("success");
+    } catch (error: unknown) {
+      if (error instanceof FirebaseError && error.code === "auth/user-not-found") {
+        setMessage("Email não encontrado.");
+      } else {
+        setMessage("Erro ao enviar email de recuperação.");
+      }
+      setMessageType("error");
+    } finally {
+      setLoading(false);
     }
-    setMessageType("error");
-  } finally {
-    setLoading(false);
   }
-}
 
   return (
     <main className="signin-page">

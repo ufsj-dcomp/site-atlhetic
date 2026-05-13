@@ -1,4 +1,4 @@
-.signin-page {
+.create-game-page {
   min-height: 100vh;
   display: grid;
   place-items: center;
@@ -6,9 +6,9 @@
   background: linear-gradient(180deg, #f5f5f5 0%, #e9e9e9 100%);
 }
 
-.signin-card {
+.create-game-card {
   width: 100%;
-  max-width: 420px;
+  max-width: 480px; 
   background: #fff;
   border: 1px solid #cfcfcf;
   border-radius: 28px;
@@ -16,12 +16,12 @@
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
 }
 
-.signin-brand {
+.create-game-brand {
   text-align: center;
   margin-bottom: 22px;
 }
 
-.signin-logo {
+.create-game-logo {
   width: 74px;
   height: 74px;
   margin: 0 auto 12px;
@@ -30,39 +30,35 @@
   display: grid;
   place-items: center;
   font-weight: 800;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   color: #111;
 }
 
-.signin-brand h1 {
+.create-game-brand h1 {
   margin: 0;
   font-size: 1.9rem;
   color: #111;
   font-weight: 800;
 }
 
-.signin-brand p {
+.create-game-brand p {
   margin: 8px 0 2px;
   font-size: 1.15rem;
   font-weight: 700;
   color: #111;
 }
 
-.signin-brand span {
-  font-size: 0.95rem;
-  color: #444;
-}
-
-.signin-form {
+.create-game-form {
   display: grid;
   gap: 14px;
 }
 
-.signin-form label {
+.create-game-form label {
   display: grid;
   gap: 6px;
   font-size: 0.95rem;
   color: #222;
+  font-weight: 600;
 }
 
 .input-wrap {
@@ -78,14 +74,15 @@
   width: 42px;
   display: grid;
   place-items: center;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #111;
   border-right: 1px solid #cfcfcf;
   background: #f7f7f7;
   height: 42px;
 }
 
-.input-wrap input {
+.input-wrap input,
+.input-wrap select {
   width: 100%;
   border: 0;
   outline: none;
@@ -98,75 +95,26 @@
   font: inherit;
 }
 
-.forgot-btn {
-  background: none;
-  border: none;
-  color: #111;
-  font-size: 0.88rem;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 0;
-  text-align: right;
-}
-
-.forgot-btn:hover {
-  text-decoration: underline;
-}
-
-.primary-btn,
-.google-btn {
+.primary-btn {
   height: 44px;
   border-radius: 8px;
   border: 0;
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
-}
-
-.primary-btn {
   background: #111;
   color: #fff;
+  margin-top: 10px;
+  transition: opacity 0.2s;
+}
+
+.primary-btn:hover {
+  opacity: 0.9;
 }
 
 .primary-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
-}
-
-.divider {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin: 4px 0;
-  color: #666;
-  font-size: 0.9rem;
-}
-
-.divider::before,
-.divider::after {
-  content: "";
-  height: 1px;
-  background: #d2d2d2;
-  flex: 1;
-}
-
-.google-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: #fff;
-  border: 1px solid #9a9a9a;
-  color: #111;
-}
-
-.google-icon {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-weight: 800;
 }
 
 .feedback {
@@ -175,7 +123,7 @@
   font-weight: 600;
   padding: 10px 12px;
   border-radius: 8px;
-  margin-top: 6px;
+  margin-bottom: 14px;
 }
 
 .feedback.error {
@@ -190,42 +138,10 @@
   border: 1px solid #86efac;
 }
 
-.bottom-text {
-  text-align: center;
-  font-size: 0.92rem;
-  color: #333;
-}
-
-.bottom-text a {
-  color: #111;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.bottom-text a:hover {
-  text-decoration: underline;
-}
-
 @media (max-width: 480px) {
-  .signin-card {
+  .create-game-card {
     padding: 22px 16px 18px;
     border-radius: 22px;
   }
-
-  .signin-brand h1 {
-    font-size: 1.6rem;
-  }
-
-  .signin-brand p {
-    font-size: 1.05rem;
-  }
-}
-
-/* Remove a cor esquisita do preenchimento automático do navegador */
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 50px white inset !important;
-    -webkit-text-fill-color: #111 !important;
+  .create-game-brand h1 { font-size: 1.6rem; }
 }
