@@ -9,6 +9,7 @@ import PrivateRoute from "../features/auth/components/PrivateRoute";
 import Profile from "../features/users/pages/Profile";
 import { CreateGame } from '../features/admin/pages/CreateGame';
 import { AdminHome } from '../features/admin/pages/AdminHome';
+import { ManageGames } from '../features/admin/pages/ManageGames';
 
 
 export default function AppRoutes() {
@@ -45,6 +46,11 @@ export default function AppRoutes() {
       <Route path="/admin/cadastrar-jogo" element={
             <PrivateRoute>
               <CreateGame />
+            </PrivateRoute>
+      } />
+      <Route path="/admin/gerenciar-jogos" element={
+            <PrivateRoute>
+                <ManageGames />
             </PrivateRoute>
       } />
     </Routes>

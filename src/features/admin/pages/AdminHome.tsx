@@ -19,9 +19,18 @@ export function AdminHome() {
       title: 'Editar Jogos Existentes',
       description: 'Altere informações, atualize placares ou cancele partidas cadastradas.',
       icon: <FaEdit />,
-      path: '/admin/editar-jogos', 
+      path: '/admin/gerenciar-jogos', 
       colorBg: '#fef08a', 
       colorIcon: '#ca8a04' 
+    },
+    {
+      id: 'publish-news',
+      title: 'Publicar Novas Notícias',
+      description: 'Publique novos notícias sobre o Athletic Club',
+      icon: <FaPlus />,
+      path: '/admin/publicar-noticias',
+      colorBg: '#b2b5b6ff', 
+      colorIcon: '#1f1e1eff' 
     }
   ];
 

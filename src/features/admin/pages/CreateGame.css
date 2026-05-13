@@ -8,7 +8,7 @@
 
 .create-game-card {
   width: 100%;
-  max-width: 480px; /* Um pouco mais largo que o login para caber o form bem */
+  max-width: 480px; 
   background: #fff;
   border: 1px solid #cfcfcf;
   border-radius: 28px;
