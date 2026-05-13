@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Landing from "../pages/Landing";
 import Home from "../pages/Home";
+import Loja from "../features/loja/pages/Loja";
 import Jogos from "../pages/Jogos"; 
 import DetalheJogo from "../pages/DetalheJogo";
 import Signup from "../features/auth/pages/Signup";
@@ -24,6 +25,11 @@ export default function AppRoutes() {
        <Route path="/jogos" element={
         <PrivateRoute>
           <Jogos />
+        </PrivateRoute>
+      } />
+      <Route path="/loja" element={
+        <PrivateRoute>
+          <Loja />
         </PrivateRoute>
       } />
       <Route path="/jogo/:id" element={
