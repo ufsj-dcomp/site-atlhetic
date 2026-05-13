@@ -3,6 +3,7 @@ import Landing from "../pages/Landing";
 import Home from "../pages/Home";
 import Jogos from "../pages/Jogos"; 
 import DetalheJogo from "../pages/DetalheJogo";
+import Noticias from "../pages/Noticias";
 import Signup from "../features/auth/pages/Signup";
 import Signin from "../features/auth/pages/Signin";
 import PrivateRoute from "../features/auth/components/PrivateRoute";
@@ -26,6 +27,11 @@ export default function AppRoutes() {
       <Route path="/jogo/:id" element={
        <PrivateRoute>
          <DetalheJogo />
+       </PrivateRoute>
+      } />
+      <Route path="/noticias" element={
+       <PrivateRoute>
+         <Noticias />
        </PrivateRoute>
       } />
       <Route path="/cadastro" element={<Signup />} />
