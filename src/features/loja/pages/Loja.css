@@ -99,6 +99,14 @@ body {
           height: 250px;
           object-fit: contain;
         }
+        .btn-produto {
+        background-color: green;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        }
 
         .card-content {
           padding: 12px;

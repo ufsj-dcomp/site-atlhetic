@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { getProducts } from "../services/products"; 
 import Sidebar from "../../../pages/Sidebar";
 import "./Loja.css"
+import { useNavigate } from "react-router-dom";
 export default function Loja() {
 
 
   const [products, setProducts] = useState<any[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadProducts() {
@@ -48,14 +50,7 @@ export default function Loja() {
 
                   <button
                     className="btn-produto"
-                    style={{
-                      backgroundColor: "green",
-                      color: "white",
-                      border: "none",
-                      padding: "10px 16px",
-                      borderRadius: "8px",
-                      cursor: "pointer"
-                    }}
+                    onClick={() => navigate(`/produto/${product.id}`)}
                   >
                     Ver produto
                   </button>

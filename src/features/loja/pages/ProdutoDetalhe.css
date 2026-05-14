@@ -1,0 +1,42 @@
+.produto-container {
+  padding: 30px;
+  margin-left: 240px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.produto-carousel {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.produto-imagem {
+  width: 350px;
+  border-radius: 12px;
+}
+
+.seta-btn {
+  font-size: 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.comprar-btn {
+  margin-top: 30px;
+  padding: 12px 30px;
+  background: green;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.comprar-btn:hover {
+  background: #145a32;
+}

@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Landing from "../pages/Landing";
 import Home from "../pages/Home";
 import Loja from "../features/loja/pages/Loja";
+import ProdutoDetalhe from "../features/loja/pages/ProdutoDetalhe";
 import Jogos from "../pages/Jogos"; 
 import DetalheJogo from "../pages/DetalheJogo";
 import Signup from "../features/auth/pages/Signup";
@@ -32,6 +33,14 @@ export default function AppRoutes() {
           <Loja />
         </PrivateRoute>
       } />
+      <Route
+        path="/produto/:id"
+        element={
+          <PrivateRoute>
+            <ProdutoDetalhe />
+          </PrivateRoute>
+        }
+      />
       <Route path="/jogo/:id" element={
        <PrivateRoute>
          <DetalheJogo />
