@@ -14,6 +14,14 @@ export default function ProdutoDetalhe() {
 
   const [currentImage, setCurrentImage] = useState(0);
 
+  const [selectedSize, setSelectedSize] = useState("");
+
+  const [quantity, setQuantity] = useState(1);
+
+  const [cep, setCep] = useState("");
+
+  const [shipping, setShipping] = useState<number | null>(null);
+
   useEffect(() => {
     async function loadProduct() {
       if (!id) return;
@@ -26,12 +34,8 @@ export default function ProdutoDetalhe() {
     loadProduct();
   }, [id]);
 
-  if (!product) {
-    return <h1>Carregando...</h1>;
-  }
-
   function nextImage() {
-    if (!product.images) return;
+    if (!product?.images) return;
 
     setCurrentImage((prev) =>
       prev === product.images.length - 1 ? 0 : prev + 1
@@ -39,11 +43,23 @@ export default function ProdutoDetalhe() {
   }
 
   function prevImage() {
-    if (!product.images) return;
+    if (!product?.images) return;
 
     setCurrentImage((prev) =>
       prev === 0 ? product.images.length - 1 : prev - 1
     );
+  }
+
+  function calculateShipping() {
+    if (!cep) return;
+
+    const fakeShipping = 25;
+
+    setShipping(fakeShipping);
+  }
+
+  if (!product) {
+    return <h1>Carregando...</h1>;
   }
 
   return (
@@ -51,37 +67,106 @@ export default function ProdutoDetalhe() {
       <Sidebar />
 
       <div className="produto-container">
-        <h1>{product.name}</h1>
+        <div className="produto-content">
 
-        <h2>R$ {product.price}</h2>
+          <div className="produto-carousel">
+            <button
+              className="seta-btn"
+              onClick={prevImage}
+            >
+              ←
+            </button>
 
-        <p>{product.description}</p>
+            <img
+              src={product.images[currentImage]}
+              alt={product.name}
+              className="produto-imagem"
+            />
 
-        <div className="produto-carousel">
-          <button
-            className="seta-btn"
-            onClick={prevImage}
-          >
-            ←
-          </button>
+            <button
+              className="seta-btn"
+              onClick={nextImage}
+            >
+              →
+            </button>
+          </div>
 
-          <img
-            src={product.images[currentImage]}
-            alt={product.name}
-            className="produto-imagem"
-          />
+          <div className="produto-info">
+            <h1>{product.name}</h1>
 
-          <button
-            className="seta-btn"
-            onClick={nextImage}
-          >
-            →
-          </button>
+            <h2>R$ {product.price}</h2>
+
+            <p>{product.description}</p>
+
+            {product.category === "camisas" && (
+              <div className="campo">
+                <label>Tamanho</label>
+
+                <select
+                  value={selectedSize}
+                  onChange={(e) =>
+                    setSelectedSize(e.target.value)
+                  }
+                >
+                  <option value="">
+                    Selecione um tamanho
+                  </option>
+
+                  {product.tamanho.map(
+                    (size: string, index: number) => (
+                      <option
+                        key={index}
+                        value={size}
+                      >
+                        {size.toUpperCase()}
+                      </option>
+                    )
+                  )}
+                </select>
+              </div>
+            )}
+
+            <div className="campo">
+              <label>Quantidade</label>
+
+              <input
+                type="number"
+                min="1"
+                value={quantity}
+                onChange={(e) =>
+                  setQuantity(Number(e.target.value))
+                }
+              />
+            </div>
+
+            <div className="campo">
+              <label>Consultar frete</label>
+
+              <input
+                type="text"
+                placeholder="Digite seu CEP"
+                value={cep}
+                onChange={(e) => setCep(e.target.value)}
+              />
+
+              <button
+                className="frete-btn"
+                onClick={calculateShipping}
+              >
+                Consultar
+              </button>
+
+              {shipping && (
+                <p>Frete: R$ {shipping}</p>
+              )}
+            </div>
+
+            <button className="comprar-btn">
+              Comprar
+            </button>
+          </div>
+
         </div>
-
-        <button className="comprar-btn">
-          Comprar
-        </button>
       </div>
     </div>
   );
