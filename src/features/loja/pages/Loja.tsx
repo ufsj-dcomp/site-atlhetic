@@ -1,6 +1,6 @@
-import Sidebar from "./Sidebar";
+import Sidebar from "../../../pages/Sidebar";
 
-export default function Home() {
+export default function Loja() {
   return (
     <>
       <style>
@@ -43,7 +43,7 @@ export default function Home() {
         .banner img {
           width: 100%;
           height: 320px;
-          object-fit: cover;
+          object-fit: contain;
         }
 
         .banner::after {
@@ -103,8 +103,8 @@ export default function Home() {
 
         .card img {
           width: 100%;
-          height: 140px;
-          object-fit: cover;
+          height: 250px;
+          object-fit: contain;
         }
 
         .card-content {
@@ -143,49 +143,83 @@ export default function Home() {
         <div className="content">
           <input
             className="search"
-            placeholder="Buscar notícias, jogos..."
+            placeholder="Buscar produto..."
           />
 
-          <div className="banner">
-            <img src="/titulo.jpeg" alt="banner" />
-            <div className="banner-content">
-              <div className="tag">Destaque</div>
-              <h2 style={{ color: "white" }}>Athletic vence mais uma no campeonato</h2>
-              <span>07 Abr 2026</span>
-            </div>
-          </div>
+          
 
           <div className="section-title">
-            <h3>Últimas Notícias</h3>
+            <h3>Produtos</h3>
             <span style={{ color: "#1F6E3C", cursor: "pointer" }}>
-              Ver todas
             </span>
           </div>
 
           <div className="news-grid">
             <div className="card">
-              <img src="/noticia1.jpg" alt="" />
+              <img src="/camisa1.png" alt="" />
               <div className="card-content">
-                <span>07 Abr 2026</span>
-                <p>Novo reforço chega ao Athletic</p>
+                <p>Camisa 1</p>
+                <button
+                    className="btn-produto"
+                    style={{
+                        backgroundColor: "green",
+                        color: "white",
+                        border: "none",
+                        padding: "10px 16px",
+                        borderRadius: "8px",
+                        cursor: "pointer"
+                    }}
+                    >
+                    Ver produto
+                </button>
               </div>
             </div>
 
             <div className="card">
-              <img src="/time.jpg" alt="" />
+              <img src="/camisa2.webp" alt="" />
               <div className="card-content">
-                <span>06 Abr 2026</span>
-                <p>Próximo jogo será no sábado</p>
+                <p>Camisa 2</p>
+                <button
+                    className="btn-produto"
+                    style={{
+                        backgroundColor: "green",
+                        color: "white",
+                        border: "none",
+                        padding: "10px 16px",
+                        borderRadius: "8px",
+                        cursor: "pointer"
+                    }}
+                    >
+                    Ver produto
+                </button>
               </div>
             </div>
 
+
             <div className="card">
-              <img src="/noticia2.jpg" alt="" />
+              <img src="/garrafa.webp" alt="" />
               <div className="card-content">
-                <span>05 Abr 2026</span>
-                <p>Time se prepara para decisão</p>
+                <p>Garrafa Térmica 750ml </p>
+                <button
+                    className="btn-produto"
+                    style={{
+                        backgroundColor: "green",
+                        color: "white",
+                        border: "none",
+                        padding: "10px 16px",
+                        borderRadius: "8px",
+                        cursor: "pointer"
+                    }}
+                    >
+                    Ver produto
+                </button>
               </div>
             </div>
+
+
+            
+
+            
           </div>
         </div>
       </div>
