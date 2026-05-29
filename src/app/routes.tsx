@@ -17,10 +17,10 @@ import PrivateRoute from "../features/auth/components/PrivateRoute";
 
 import Profile from "../features/users/pages/Profile";
 
-import { CreateGame } from "../features/admin/pages/CreateGame";
-import { AdminHome } from "../features/admin/pages/AdminHome";
-import { ManageGames } from "../features/admin/pages/ManageGames";
-import { CreateNews } from "../features/admin/pages/CreateNews";
+import { CreateGame } from "../features/games/pages/CreateGame";
+import { AdminHome } from "../features/home/pages/AdminHome";
+import { ManageGames } from "../features/games/components/ManageGames";
+import { CreateNews } from "../features/news/pages/CreateNews";
 
 export default function AppRoutes() {
   return (

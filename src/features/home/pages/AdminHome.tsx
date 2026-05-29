@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FaPlus, FaEdit, FaUserShield, FaNewspaper } from 'react-icons/fa';
-import './AdminHome.css';
+import '../styles/AdminHome.css';
 
 export function AdminHome() {
   // Array com as funcionalidades
