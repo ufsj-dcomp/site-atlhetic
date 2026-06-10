@@ -21,6 +21,9 @@ import { CreateGame } from "../features/games/pages/CreateGame";
 import { AdminHome } from "../features/home/pages/AdminHome";
 import { ManageGames } from "../features/games/components/ManageGames";
 import { CreateNews } from "../features/news/pages/CreateNews";
+import { AdminProducts } from "../features/loja/pages/admin/AdminProducts";
+import { CreateProduct } from "../features/loja/pages/admin/CreateProduct";
+import { EditProduct } from "../features/loja/pages/admin/EditProduct";
 
 export default function AppRoutes() {
   return (
@@ -134,6 +137,33 @@ export default function AppRoutes() {
         element={
           <PrivateRoute>
             <CreateNews />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/admin/produtos"
+        element={
+          <PrivateRoute>
+            <AdminProducts />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/admin/produtos/criar"
+        element={
+          <PrivateRoute>
+            <CreateProduct />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/admin/produtos/:id/editar"
+        element={
+          <PrivateRoute>
+            <EditProduct />
           </PrivateRoute>
         }
       />
