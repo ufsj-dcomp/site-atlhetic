@@ -4,7 +4,7 @@ import Sidebar from "../../../components/Sidebar";
 
 import { getProductById } from "../services/products";
 
-import "./ProdutoDetalhe.css";
+import "../styles/ProdutoDetalhe.css";
 
 export default function ProdutoDetalhe() {
   const { id } = useParams();
