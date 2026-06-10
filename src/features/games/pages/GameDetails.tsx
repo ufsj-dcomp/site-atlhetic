@@ -6,9 +6,9 @@ import Sidebar from "../../../components/Sidebar";
 
 import "../styles/GameDetails.css";
 
-import { getGames } from "../../admin/services/gameService";
+import { getGames } from "../services/gameService";
 
-import type { GameData } from "../../admin/types/game";
+import type { GameData } from "../types/game";
 
 type Game = GameData & {
   id: string;

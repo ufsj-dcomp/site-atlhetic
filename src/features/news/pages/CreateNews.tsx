@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { createNews } from '../services/newsService';
+import { createNews } from '../services/createNewsService';
 import { FaNewspaper, FaImage, FaCalendarAlt} from 'react-icons/fa';
-import './CreateNews.css';
+import '../styles/CreateNews.css';
 
 export interface NewsData {
   title: string;
@@ -34,7 +34,7 @@ export function CreateNews() {
       await createNews(formData);
       setStatus({ type: 'success', message: 'Notícia publicada com sucesso!' });
       setFormData({ title: '', content: '', image: '', publishedAt: '' });
-    } catch (error) {
+    } catch {
       setStatus({ type: 'error', message: 'Erro ao publicar notícia. Verifique as permissões.' });
     } finally {
       setLoading(false);

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { createGame } from '../services/gameService';
 import type { GameData } from '../types/game';
 import { FaTrophy, FaCalendarAlt, FaMapMarkerAlt, FaUserShield, FaPlus } from 'react-icons/fa';
-import './CreateGame.css'; 
+import '../styles/CreateGame.css'; 
 
 export function CreateGame() {
   const [formData, setFormData] = useState<GameData>({
@@ -29,7 +29,7 @@ export function CreateGame() {
       setStatus({ type: 'success', message: 'Jogo cadastrado com sucesso!' });
       // Limpa os campos
       setFormData({ title: '', dateTime: '', location: '', opponent: '' });
-    } catch (error) {
+    } catch {
       setStatus({ type: 'error', message: 'Erro ao cadastrar. Tente novamente.' });
     } finally {
       setLoading(false);

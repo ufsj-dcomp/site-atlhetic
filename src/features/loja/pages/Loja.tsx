@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getProducts } from "../services/products"; 
 import Sidebar from "../../../components/Sidebar";
-import "./Loja.css"
+import "../styles/Loja.css";
 import { useNavigate } from "react-router-dom";
 export default function Loja() {
 
