@@ -7,7 +7,7 @@ export default function AdminRoute({ children }: { children: React.ReactNode }) 
 
   if (loading) return null;
   if (!user) return <Navigate to="/login" />;
-  if (user.role !== "admin") return <Navigate to="/home" />;
+  if (user.role !== "administrador") return <Navigate to="/home" />;
 
   return <PrivateRoute>{children}</PrivateRoute>;
 }
