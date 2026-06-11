@@ -3,20 +3,28 @@ import { getProducts } from "../services/products";
 import Sidebar from "../../../components/Sidebar";
 import "../styles/Loja.css";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../../contexts/CartContext"; 
+import type { Product } from "../../../contexts/CartContext";
+
 export default function Loja() {
-
-
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const navigate = useNavigate();
+  
+  const { addToCart } = useCart();
 
   useEffect(() => {
     async function loadProducts() {
       const data = await getProducts();
-      setProducts(data);
+      setProducts(data as Product[]); 
     }
 
     loadProducts();
   }, []);
+
+  const handleAddToCart = (product: Product) => {
+    addToCart(product);
+    alert(`${product.name} adicionado ao carrinho!`); 
+  };
 
   return (
     <>
@@ -54,6 +62,14 @@ export default function Loja() {
                   >
                     Ver produto
                   </button>
+
+                  <button
+                      className="btn-produto"
+                      style={{ backgroundColor: '#1F6E3C', color: 'white' }}
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      Comprar
+                    </button>
                 </div>
               </div>
             ))}
