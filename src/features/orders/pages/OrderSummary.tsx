@@ -1,38 +1,84 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
 
+import { db } from "../../../lib/firebase";
 import Sidebar from "../../../components/Sidebar";
 
 import "../styles/OrderSummary.css";
 
+interface OrderItem {
+  productId: string;
+  name: string;
+  quantity: number;
+  price: number;
+}
+
+interface Order {
+  id: string;
+  userId: string;
+  status: string;
+  total: number | string;
+  items: OrderItem[];
+}
+
 export default function OrderSummary() {
   const navigate = useNavigate();
 
-  const itens = [
-    {
-      id: 1,
-      nome: "Camisa Oficial",
-      quantidade: 2,
-      valor: 300,
-    },
-    {
-      id: 2,
-      nome: "Copo Stanley Athletic",
-      quantidade: 1,
-      valor: 139.99,
-    },
-  ];
+  const [order, setOrder] = useState<Order | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const total = itens.reduce(
-    (acc, item) => acc + item.valor * item.quantidade,
-    0
-  );
+  useEffect(() => {
+    loadOrder();
+  }, []);
+
+  const loadOrder = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "orders"));
+
+      console.log("Quantidade de pedidos:", querySnapshot.size);
+
+      if (querySnapshot.empty) {
+        console.log("Nenhum pedido encontrado no Firebase");
+        setLoading(false);
+        return;
+      }
+
+      const firstDoc = querySnapshot.docs[0];
+      const data = firstDoc.data();
+
+      console.log("Pedido encontrado:", data);
+
+      setOrder({
+        id: firstDoc.id,
+        userId: data.userId || "",
+        status: data.status || "",
+        total: data.total || 0,
+        items: Array.isArray(data.items) ? data.items : [],
+      });
+    } catch (error) {
+      console.error("Erro ao buscar pedido:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="order-layout">
+        <Sidebar />
+        <div className="order-content">
+          <h1>Carregando pedido...</h1>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="order-layout">
       <Sidebar />
 
       <div className="order-content">
-
         <button
           className="back-button"
           onClick={() => navigate(-1)}
@@ -44,50 +90,60 @@ export default function OrderSummary() {
           Resumo do Pedido
         </h1>
 
-        <div className="order-card">
-
-          <div className="order-header">
-            <h2>Itens da Compra</h2>
+        {!order ? (
+          <div className="order-card">
+            <p>Nenhum pedido encontrado.</p>
           </div>
-
-          {itens.map((item) => (
-            <div
-              key={item.id}
-              className="order-item"
-            >
-              <div>
-                <h3>{item.nome}</h3>
-
-                <p>
-                  Quantidade: {item.quantidade}
-                </p>
+        ) : (
+          <>
+            <div className="order-card">
+              <div className="order-header">
+                <h2>Itens da Compra</h2>
               </div>
 
-              <strong>
-                R$ {(item.valor * item.quantidade).toFixed(2)}
-              </strong>
+              {order.items.length === 0 ? (
+                <p>Pedido sem itens.</p>
+              ) : (
+                order.items.map((item, index) => (
+                  <div
+                    key={index}
+                    className="order-item"
+                  >
+                    <div>
+                      <h3>{item.name}</h3>
+
+                      <p>
+                        Quantidade: {item.quantity}
+                      </p>
+                    </div>
+
+                    <strong>
+                      R${" "}
+                      {(parseFloat(String(item.price)) * Number(item.quantity)).toFixed(2)}
+                    </strong>
+                  </div>
+                ))
+              )}
+
+              <div className="order-total">
+                <span>Total</span>
+
+                <strong>
+                  {typeof order.total === "number"
+                    ? `R$ ${order.total.toFixed(2)}`
+                    : order.total}
+                </strong>
+              </div>
             </div>
-          ))}
 
-          <div className="order-total">
-            <span>Total</span>
-
-            <strong>
-              R$ {total.toFixed(2)}
-            </strong>
-          </div>
-
-        </div>
-
-        <button
-          className="continue-button"
-          onClick={() =>
-            navigate("/pagamento")
-          }
-        >
-          Escolher Forma de Pagamento
-        </button>
-
+            <button
+              className="continue-button"
+              onClick={() => navigate("/pagamento")}
+            >
+              Escolher Forma de Pagamento
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

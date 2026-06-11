@@ -17,6 +17,8 @@ import PrivateRoute from "../features/auth/components/PrivateRoute";
 
 import Profile from "../features/users/pages/Profile";
 
+import OrderSummary from "../features/orders/pages/OrderSummary";
+
 import { CreateGame } from "../features/games/pages/CreateGame";
 import { AdminHome } from "../features/home/pages/AdminHome";
 import { ManageGames } from "../features/games/components/ManageGames";
@@ -102,6 +104,17 @@ export default function AppRoutes() {
         }
       />
 
+
+      <Route
+        path="/resumo-pedido"
+        element={
+          <PrivateRoute>
+            <OrderSummary />
+          </PrivateRoute>
+        }
+      />
+
+      
       <Route
         path="/admin"
         element={
