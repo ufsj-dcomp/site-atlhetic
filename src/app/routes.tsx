@@ -10,6 +10,7 @@ import News from "../features/news/pages/News";
 
 import Loja from "../features/loja/pages/Loja";
 import ProdutoDetalhe from "../features/loja/pages/ProdutoDetalhe";
+import Carrinho from "../features/loja/pages/Carrinho";
 
 import Signup from "../features/auth/pages/Signup";
 import Signin from "../features/auth/pages/Signin";
@@ -80,6 +81,14 @@ export default function AppRoutes() {
           </PrivateRoute>
         }
       />
+
+      <Route 
+        path="/carrinho" 
+        element={
+          <PrivateRoute>
+            <Carrinho />
+          </PrivateRoute>
+        } />
 
       <Route
         path="/produto/:id"

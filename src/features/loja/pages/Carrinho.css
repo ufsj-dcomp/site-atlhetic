@@ -1,0 +1,155 @@
+.carrinho-page {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  color: #111;
+}
+
+.carrinho-container {
+  width: 100%;
+  max-width: 800px;
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.carrinho-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 2px solid #eaeaea;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.carrinho-vazio {
+  text-align: center;
+  padding: 3rem 0;
+  color: #666;
+}
+
+.carrinho-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.carrinho-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+}
+
+.carrinho-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-info h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.item-categoria {
+  font-size: 0.85rem;
+  color: #888;
+  margin: 0 0 0.5rem 0;
+}
+
+.item-preco {
+  font-weight: bold;
+  color: #1F6E3C; /* Verde do Athletic */
+  margin: 0;
+}
+
+.item-acoes {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.item-quantidade {
+  font-weight: bold;
+  background: #eee;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+}
+
+.btn-remover {
+  background: none;
+  border: none;
+  color: #ff4d4d;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.btn-remover:hover {
+  color: #cc0000;
+}
+
+.carrinho-resumo {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid #eaeaea;
+}
+
+.resumo-linha {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.resumo-total {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #1F6E3C;
+}
+
+.btn-finalizar, .btn-voltar {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-finalizar {
+  background-color: #111;
+  color: white;
+}
+
+.btn-voltar {
+  background-color: #1F6E3C;
+  color: white;
+  margin-top: 1rem;
+  width: auto;
+  padding: 0.8rem 2rem;
+}
+
+.btn-finalizar:hover, .btn-voltar:hover {
+  opacity: 0.85;
+}
+
+
+.carrinho-header h2 {
+  color: #111;
+  margin: 0;
+  font-size: 1.8rem;
+}
