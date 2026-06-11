@@ -56,10 +56,17 @@ export default function ProdutoDetalhe() {
 
           <div className="produto-info">
             <h1>{product.name}</h1>
-            <h2>{currencyFormatter.format(product.price)}</h2>
-            <p>{product.description}</p>
 
-            <p>
+            <h2 className="produto-preco">
+              {currencyFormatter.format(product.price)}
+            </h2>
+
+            <div className="produto-descricao-card">
+              <h3>Descrição do Produto</h3>
+              <p>{product.description}</p>
+            </div>
+
+            <p className="produto-categoria">
               <strong>Categoria:</strong> {product.category}
             </p>
 
@@ -84,14 +91,23 @@ export default function ProdutoDetalhe() {
                 onChange={(e) => setCep(e.target.value)}
               />
 
-              <button className="frete-btn" onClick={calculateShipping}>
+              <button
+                className="frete-btn"
+                onClick={calculateShipping}
+              >
                 Consultar
               </button>
 
-              {shipping !== null && <p>Frete: R$ {shipping}</p>}
+              {shipping !== null && (
+                <p className="produto-frete">
+                  Frete: R$ {shipping}
+                </p>
+              )}
             </div>
 
-            <button className="comprar-btn">Comprar</button>
+            <button className="comprar-btn">
+              Comprar
+            </button>
           </div>
         </div>
       </div>
