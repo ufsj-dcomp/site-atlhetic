@@ -99,7 +99,8 @@ export default function OrderSummary() {
                     </div>
 
                     <strong>
-                      R$ {(Number(item.price) * Number(item.quantity)).toFixed(2)}
+                                            R${" "}
+                      {(parseFloat(String(item.price)) * Number(item.quantity)).toFixed(2)}
                     </strong>
                   </div>
                 ))
