@@ -38,7 +38,7 @@ export default function Home() {
       <div className="content">
         <div className="hero-section">
           <img
-            src="/titulo.jpg"
+            src="/titulo.jpeg"
             className="hero-image"
           />
 
@@ -47,9 +47,9 @@ export default function Home() {
               Destaque
             </span>
 
-            <h1>
-              Athletic Clube
-            </h1>
+          <div className="logo-section">
+            <h1>Athletic Clube</h1>
+          </div>
 
             <p>
               Acompanhe notícias, jogos e
