@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useCart } from "../../../contexts/CartContext";
 import Sidebar from "../../../components/Sidebar";
 import { getProductById } from "../services/products";
 import type { Product } from "../types/products";
@@ -12,6 +13,7 @@ const currencyFormatter = new Intl.NumberFormat("pt-BR", {
 
 export default function ProdutoDetalhe() {
   const { id } = useParams<{ id: string }>();
+  const { addToCart } = useCart();
 
   const [product, setProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
@@ -34,6 +36,13 @@ export default function ProdutoDetalhe() {
 
     const fakeShipping = 25;
     setShipping(fakeShipping);
+  }
+
+  function handleComprar() {
+    if (!product) return;
+
+    addToCart(product, quantity);
+    alert(`${quantity}x ${product.name} adicionado ao carrinho!`);
   }
 
   if (!product) {
@@ -105,7 +114,7 @@ export default function ProdutoDetalhe() {
               )}
             </div>
 
-            <button className="comprar-btn">
+            <button className="comprar-btn" onClick={handleComprar}>
               Comprar
             </button>
           </div>

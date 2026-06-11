@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../../../contexts/CartContext";
 import Sidebar from "../../../components/Sidebar";
 import { getProducts } from "../services/products";
 import type { Product } from "../types/products";
@@ -14,7 +13,6 @@ const currencyFormatter = new Intl.NumberFormat("pt-BR", {
 export default function Loja() {
   const [products, setProducts] = useState<Product[]>([]);
   const navigate = useNavigate();
-  const { addToCart } = useCart();
 
   useEffect(() => {
     async function loadProducts() {
@@ -26,11 +24,6 @@ export default function Loja() {
   }, []);
 
   const visibleProducts = products.filter((product) => product.available);
-
-  const handleAddToCart = (product: Product) => {
-    addToCart(product);
-    alert(`${product.name} adicionado ao carrinho!`);
-  };
 
   return (
     <div className="layout">
@@ -61,14 +54,6 @@ export default function Loja() {
                   onClick={() => navigate(`/produto/${product.id}`)}
                 >
                   Ver produto
-                </button>
-
-                <button
-                  className="btn-produto"
-                  style={{ backgroundColor: '#1F6E3C', color: 'white' }}
-                  onClick={() => handleAddToCart(product)}
-                >
-                  Comprar
                 </button>
               </div>
             </div>
