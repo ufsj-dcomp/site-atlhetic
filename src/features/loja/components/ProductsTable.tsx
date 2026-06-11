@@ -1,5 +1,6 @@
 import type { Product } from "../types/products";
-import "../styles/adminProducts.css";
+import "../styles/adminProductsTable.css";
+import "../styles/adminProductsPage.css";
 
 interface ProductsTableProps {
   products: Product[];

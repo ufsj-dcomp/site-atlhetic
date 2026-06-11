@@ -34,5 +34,9 @@ export function useProductById(id?: string) {
     };
   }, [id]);
 
-  return { product, loading, error };
+  return {
+    product,
+    loading,
+    error,
+  };
 }

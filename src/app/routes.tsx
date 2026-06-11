@@ -11,7 +11,7 @@ import News from "../features/news/pages/News";
 import Loja from "../features/loja/pages/Loja";
 import ProdutoDetalhe from "../features/loja/pages/ProdutoDetalhe";
 
-import Ingressos from "../features/ingressos/pages/ingressos";
+import Ingressos from "../features/ingressos/pages/Ingressos";
 import IngressosDetalhe from "../features/ingressos/pages/IngressosDetalhe";
 
 import Signup from "../features/auth/pages/Signup";
@@ -19,6 +19,10 @@ import Signin from "../features/auth/pages/Signin";
 import PrivateRoute from "../features/auth/components/PrivateRoute";
 
 import Profile from "../features/users/pages/Profile";
+
+import OrderSummary from "../features/orders/pages/OrderSummary";
+import Payment from "../features/orders/pages/Payment";
+
 
 import { CreateGame } from "../features/games/pages/CreateGame";
 import { AdminHome } from "../features/home/pages/AdminHome";
@@ -127,6 +131,26 @@ export default function AppRoutes() {
         }
       />
 
+
+      <Route
+        path="/resumo-pedido"
+        element={
+          <PrivateRoute>
+            <OrderSummary />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/pagamento"
+        element={
+          <PrivateRoute>
+            <Payment />
+          </PrivateRoute>
+        }
+      />
+
+      
       <Route
         path="/admin"
         element={
