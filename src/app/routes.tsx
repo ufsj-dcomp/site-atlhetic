@@ -11,6 +11,9 @@ import News from "../features/news/pages/News";
 import Loja from "../features/loja/pages/Loja";
 import ProdutoDetalhe from "../features/loja/pages/ProdutoDetalhe";
 
+import Ingressos from "../features/ingressos/pages/ingressos";
+import IngressosDetalhe from "../features/ingressos/pages/IngressosDetalhe";
+
 import Signup from "../features/auth/pages/Signup";
 import Signin from "../features/auth/pages/Signin";
 import PrivateRoute from "../features/auth/components/PrivateRoute";
@@ -74,6 +77,25 @@ export default function AppRoutes() {
           </PrivateRoute>
         }
       />
+
+      <Route
+        path="/ingressos"
+        element={
+          <PrivateRoute>
+            <Ingressos />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/ingressos/:id"
+        element={
+          <PrivateRoute>
+            <IngressosDetalhe />
+          </PrivateRoute>
+        }
+      />
+
 
       <Route
         path="/loja"
