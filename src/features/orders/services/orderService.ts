@@ -6,14 +6,7 @@ import {
 } from "firebase/firestore";
 
 import { db } from "../../../lib/firebase";
-
-export interface Order {
-  id: string;
-  total: number | string;
-  status: string;
-  userId: string;
-  paymentMethod?: string;
-}
+import type { Order } from "../types/order";
 
 export const getFirstOrder = async (): Promise<Order | null> => {
   const snapshot = await getDocs(collection(db, "orders"));
