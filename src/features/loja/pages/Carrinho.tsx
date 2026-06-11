@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../../contexts/CartContext"; 
 import { FaTrash, FaShoppingBag } from "react-icons/fa";
-import "./Carrinho.css";
+import "../styles/Carrinho.css";
 
 export default function Carrinho() {
   const { cart, removeFromCart, clearCart } = useCart();
