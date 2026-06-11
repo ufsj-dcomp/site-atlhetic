@@ -11,6 +11,9 @@ import News from "../features/news/pages/News";
 import Loja from "../features/loja/pages/Loja";
 import ProdutoDetalhe from "../features/loja/pages/ProdutoDetalhe";
 
+import Ingressos from "../features/ingressos/pages/ingressos";
+import IngressosDetalhe from "../features/ingressos/pages/IngressosDetalhe";
+
 import Signup from "../features/auth/pages/Signup";
 import Signin from "../features/auth/pages/Signin";
 import PrivateRoute from "../features/auth/components/PrivateRoute";
@@ -21,6 +24,9 @@ import { CreateGame } from "../features/games/pages/CreateGame";
 import { AdminHome } from "../features/home/pages/AdminHome";
 import { ManageGames } from "../features/games/components/ManageGames";
 import { CreateNews } from "../features/news/pages/CreateNews";
+import { AdminProducts } from "../features/loja/pages/admin/AdminProducts";
+import { CreateProduct } from "../features/loja/pages/admin/CreateProduct";
+import { EditProduct } from "../features/loja/pages/admin/EditProduct";
 
 export default function AppRoutes() {
   return (
@@ -71,6 +77,25 @@ export default function AppRoutes() {
           </PrivateRoute>
         }
       />
+
+      <Route
+        path="/ingressos"
+        element={
+          <PrivateRoute>
+            <Ingressos />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/ingressos/:id"
+        element={
+          <PrivateRoute>
+            <IngressosDetalhe />
+          </PrivateRoute>
+        }
+      />
+
 
       <Route
         path="/loja"
@@ -134,6 +159,33 @@ export default function AppRoutes() {
         element={
           <PrivateRoute>
             <CreateNews />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/admin/produtos"
+        element={
+          <PrivateRoute>
+            <AdminProducts />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/admin/produtos/criar"
+        element={
+          <PrivateRoute>
+            <CreateProduct />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/admin/produtos/:id/editar"
+        element={
+          <PrivateRoute>
+            <EditProduct />
           </PrivateRoute>
         }
       />
