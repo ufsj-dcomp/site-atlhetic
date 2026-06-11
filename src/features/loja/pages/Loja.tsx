@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../../contexts/CartContext";
 import Sidebar from "../../../components/Sidebar";
 import { getProducts } from "../services/products";
 import type { Product } from "../types/products";
@@ -13,11 +14,12 @@ const currencyFormatter = new Intl.NumberFormat("pt-BR", {
 export default function Loja() {
   const [products, setProducts] = useState<Product[]>([]);
   const navigate = useNavigate();
+  const { addToCart } = useCart();
 
   useEffect(() => {
     async function loadProducts() {
       const data = await getProducts();
-      setProducts(data);
+      setProducts(data as Product[]);
     }
 
     void loadProducts();
@@ -25,12 +27,20 @@ export default function Loja() {
 
   const visibleProducts = products.filter((product) => product.available);
 
+  const handleAddToCart = (product: Product) => {
+    addToCart(product);
+    alert(`${product.name} adicionado ao carrinho!`);
+  };
+
   return (
     <div className="layout">
       <Sidebar />
 
       <div className="content">
-        <input className="search" placeholder="Buscar produto..." />
+        <input
+          className="search"
+          placeholder="Buscar produto..."
+        />
 
         <div className="section-title">
           <h3>Produtos</h3>
@@ -51,6 +61,14 @@ export default function Loja() {
                   onClick={() => navigate(`/produto/${product.id}`)}
                 >
                   Ver produto
+                </button>
+
+                <button
+                  className="btn-produto"
+                  style={{ backgroundColor: '#1F6E3C', color: 'white' }}
+                  onClick={() => handleAddToCart(product)}
+                >
+                  Comprar
                 </button>
               </div>
             </div>
