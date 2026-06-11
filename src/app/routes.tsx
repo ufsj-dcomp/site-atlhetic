@@ -18,6 +18,8 @@ import PrivateRoute from "../features/auth/components/PrivateRoute";
 import Profile from "../features/users/pages/Profile";
 
 import OrderSummary from "../features/orders/pages/OrderSummary";
+import Payment from "../features/orders/pages/Payment";
+
 
 import { CreateGame } from "../features/games/pages/CreateGame";
 import { AdminHome } from "../features/home/pages/AdminHome";
@@ -110,6 +112,15 @@ export default function AppRoutes() {
         element={
           <PrivateRoute>
             <OrderSummary />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/pagamento"
+        element={
+          <PrivateRoute>
+            <Payment />
           </PrivateRoute>
         }
       />
