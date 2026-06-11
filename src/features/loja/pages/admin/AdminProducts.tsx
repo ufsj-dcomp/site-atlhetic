@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaPlus, FaBoxOpen } from "react-icons/fa";
+import { FaPlus, FaBoxOpen, FaArrowLeft } from "react-icons/fa";
 import { ProductsTable } from "../../components/ProductsTable";
 import { useDeleteProduct } from "../../hooks/useDeleteProduct";
 import { useProducts } from "../../hooks/useProducts";
-import "../../styles/adminProducts.css";
+import "../../styles/adminProductsPage.css";
 
 export function AdminProducts() {
   const navigate = useNavigate();
@@ -44,15 +44,27 @@ export function AdminProducts() {
             </div>
           </div>
 
-          <Link to="/admin/produtos/criar" className="admin-button admin-button-primary">
-            <FaPlus /> Novo produto
-          </Link>
+          <div className="admin-products-actions-header">
+            <button
+              type="button"
+              className="admin-button admin-button-back"
+              onClick={() => navigate("/admin")}
+            >
+              <FaArrowLeft />
+              Voltar
+            </button>
+
+            <Link
+              to="/admin/produtos/criar"
+              className="admin-button admin-button-primary"
+            >
+              <FaPlus /> Novo produto
+            </Link>
+          </div>
         </div>
 
         {(error || deleteError) && (
-          <div className="admin-products-alert">
-            {error ?? deleteError}
-          </div>
+          <div className="admin-products-alert">{error ?? deleteError}</div>
         )}
 
         {loading ? (

@@ -1,16 +1,25 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 import { ProductForm } from "../../components/ProductForm";
 import { useProductById } from "../../hooks/useProductById";
 import { useProductForm } from "../../hooks/useProductForm";
-import { productToFormValues, type Product } from "../../types/products";
 import { updateProduct } from "../../services/products";
-import "../../styles/adminProducts.css";
+import type { Product } from "../../types/products";
+import "../../styles/adminProductsPage.css";
+import "../../styles/adminProductsForm.css";
 
 function EditProductForm({ product }: { product: Product }) {
   const navigate = useNavigate();
-  const { values, errors, handleChange, validate, setErrors } =
-    useProductForm(productToFormValues(product));
+  const { values, errors, handleChange, validate, setErrors } = useProductForm({
+    name: product.name,
+    price: String(product.price),
+    image: product.image,
+    category: product.category,
+    available: product.available,
+    description: product.description,
+  });
+
   const [saving, setSaving] = useState(false);
 
   async function handleSubmit(formValues: typeof values) {
@@ -40,7 +49,6 @@ function EditProductForm({ product }: { product: Product }) {
       onSubmit={handleSubmit}
       loading={saving}
       submitLabel="Salvar alterações"
-      onCancel={() => navigate("/admin/produtos")}
     />
   );
 }
@@ -71,18 +79,26 @@ export function EditProduct() {
   }
 
   if (!product) {
-    navigate("/admin/produtos");
-    return null;
+    return <Navigate to="/admin/produtos" replace />;
   }
 
   return (
     <div className="admin-products-page">
       <div className="admin-products-container">
         <div className="admin-products-header">
-          <div>
+          <div className="admin-products-header-left">
             <h1>Editar Produto</h1>
             <p>Atualize as informações do item.</p>
           </div>
+
+          <button
+            type="button"
+            className="admin-button admin-button-back"
+            onClick={() => navigate("/admin/produtos")}
+          >
+            <FaArrowLeft />
+            Voltar
+          </button>
         </div>
 
         <EditProductForm product={product} />

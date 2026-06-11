@@ -1,24 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Sidebar from "../../../components/Sidebar";
-
 import { getProductById } from "../services/products";
-
+import type { Product } from "../types/products";
 import "../styles/ProdutoDetalhe.css";
 
+const currencyFormatter = new Intl.NumberFormat("pt-BR", {
+  style: "currency",
+  currency: "BRL",
+});
+
 export default function ProdutoDetalhe() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
 
-  const [product, setProduct] = useState<any>(null);
-
-  const [currentImage, setCurrentImage] = useState(0);
-
-  const [selectedSize, setSelectedSize] = useState("");
-
+  const [product, setProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
-
   const [cep, setCep] = useState("");
-
   const [shipping, setShipping] = useState<number | null>(null);
 
   useEffect(() => {
@@ -26,34 +23,16 @@ export default function ProdutoDetalhe() {
       if (!id) return;
 
       const data = await getProductById(id);
-
       setProduct(data);
     }
 
-    loadProduct();
+    void loadProduct();
   }, [id]);
 
-  function nextImage() {
-    if (!product?.images) return;
-
-    setCurrentImage((prev) =>
-      prev === product.images.length - 1 ? 0 : prev + 1
-    );
-  }
-
-  function prevImage() {
-    if (!product?.images) return;
-
-    setCurrentImage((prev) =>
-      prev === 0 ? product.images.length - 1 : prev - 1
-    );
-  }
-
   function calculateShipping() {
-    if (!cep) return;
+    if (!cep.trim()) return;
 
     const fakeShipping = 25;
-
     setShipping(fakeShipping);
   }
 
@@ -67,63 +46,22 @@ export default function ProdutoDetalhe() {
 
       <div className="produto-container">
         <div className="produto-content">
-
           <div className="produto-carousel">
-            <button
-              className="seta-btn"
-              onClick={prevImage}
-            >
-              ←
-            </button>
-
             <img
-              src={product.images[currentImage]}
+              src={product.image}
               alt={product.name}
               className="produto-imagem"
             />
-
-            <button
-              className="seta-btn"
-              onClick={nextImage}
-            >
-              →
-            </button>
           </div>
 
           <div className="produto-info">
             <h1>{product.name}</h1>
-
-            <h2>R$ {product.price}</h2>
-
+            <h2>{currencyFormatter.format(product.price)}</h2>
             <p>{product.description}</p>
 
-            {product.category === "camisas" && (
-              <div className="campo">
-                <label>Tamanho</label>
-
-                <select
-                  value={selectedSize}
-                  onChange={(e) =>
-                    setSelectedSize(e.target.value)
-                  }
-                >
-                  <option value="">
-                    Selecione um tamanho
-                  </option>
-
-                  {product.tamanho.map(
-                    (size: string, index: number) => (
-                      <option
-                        key={index}
-                        value={size}
-                      >
-                        {size.toUpperCase()}
-                      </option>
-                    )
-                  )}
-                </select>
-              </div>
-            )}
+            <p>
+              <strong>Categoria:</strong> {product.category}
+            </p>
 
             <div className="campo">
               <label>Quantidade</label>
@@ -132,9 +70,7 @@ export default function ProdutoDetalhe() {
                 type="number"
                 min="1"
                 value={quantity}
-                onChange={(e) =>
-                  setQuantity(Number(e.target.value))
-                }
+                onChange={(e) => setQuantity(Number(e.target.value))}
               />
             </div>
 
@@ -148,23 +84,15 @@ export default function ProdutoDetalhe() {
                 onChange={(e) => setCep(e.target.value)}
               />
 
-              <button
-                className="frete-btn"
-                onClick={calculateShipping}
-              >
+              <button className="frete-btn" onClick={calculateShipping}>
                 Consultar
               </button>
 
-              {shipping && (
-                <p>Frete: R$ {shipping}</p>
-              )}
+              {shipping !== null && <p>Frete: R$ {shipping}</p>}
             </div>
 
-            <button className="comprar-btn">
-              Comprar
-            </button>
+            <button className="comprar-btn">Comprar</button>
           </div>
-
         </div>
       </div>
     </div>

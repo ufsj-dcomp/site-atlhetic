@@ -11,7 +11,7 @@ import News from "../features/news/pages/News";
 import Loja from "../features/loja/pages/Loja";
 import ProdutoDetalhe from "../features/loja/pages/ProdutoDetalhe";
 
-import Ingressos from "../features/ingressos/pages/ingressos";
+import Ingressos from "../features/ingressos/pages/Ingressos";
 import IngressosDetalhe from "../features/ingressos/pages/IngressosDetalhe";
 
 import Signup from "../features/auth/pages/Signup";
