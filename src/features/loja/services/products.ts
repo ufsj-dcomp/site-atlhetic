@@ -5,28 +5,24 @@ import {
   doc,
   getDoc,
   getDocs,
+  onSnapshot,
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../../../lib/firebase";
 import type { Product, ProductFormValues } from "../types/products";
-import { onSnapshot } from "firebase/firestore";
 
 const productsCollection = collection(db, "products");
 
-function normalizeProduct(
-  id: string,
-  data: Record<string, unknown>
-): Product {
+function normalizeProduct(id: string, data: Record<string, unknown>): Product {
   return {
     id,
     name: typeof data.name === "string" ? data.name : "",
     price: Number(data.price ?? 0),
     image: typeof data.image === "string" ? data.image : "",
     category: typeof data.category === "string" ? data.category : "",
-    available: Boolean(data.available ?? true),
-    createdAt: data.createdAt,
-    updatedAt: data.updatedAt,
+    available: typeof data.available === "boolean" ? data.available : true,
+    description: typeof data.description === "string" ? data.description : "",
   };
 }
 
@@ -37,6 +33,7 @@ function toPayload(values: ProductFormValues) {
     image: values.image.trim(),
     category: values.category.trim(),
     available: values.available,
+    description: values.description.trim(),
     updatedAt: serverTimestamp(),
   };
 }
@@ -49,13 +46,27 @@ export async function getProducts(): Promise<Product[]> {
   );
 }
 
+export function subscribeToProducts(
+  onData: (products: Product[]) => void,
+  onError: (error: Error) => void
+) {
+  return onSnapshot(
+    productsCollection,
+    (snapshot) => {
+      const products = snapshot.docs.map((docSnap) =>
+        normalizeProduct(docSnap.id, docSnap.data())
+      );
+      onData(products);
+    },
+    onError
+  );
+}
+
 export async function getProductById(id: string): Promise<Product | null> {
   const docRef = doc(db, "products", id);
   const snapshot = await getDoc(docRef);
 
-  if (!snapshot.exists()) {
-    return null;
-  }
+  if (!snapshot.exists()) return null;
 
   return normalizeProduct(snapshot.id, snapshot.data());
 }
@@ -74,27 +85,10 @@ export async function updateProduct(
   values: ProductFormValues
 ): Promise<void> {
   const docRef = doc(db, "products", id);
-
   await updateDoc(docRef, toPayload(values));
 }
 
 export async function deleteProduct(id: string): Promise<void> {
   const docRef = doc(db, "products", id);
   await deleteDoc(docRef);
-}
-
-export function subscribeToProducts(
-  onData: (products: Product[]) => void,
-  onError: (error: Error) => void
-) {
-  return onSnapshot(
-    productsCollection,
-    (snapshot) => {
-      const products = snapshot.docs.map((docSnap) =>
-        normalizeProduct(docSnap.id, docSnap.data())
-      );
-      onData(products);
-    },
-    onError
-  );
 }
