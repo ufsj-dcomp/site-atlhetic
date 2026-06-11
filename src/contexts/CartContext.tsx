@@ -9,7 +9,7 @@ export interface CartItem extends Product {
 
 interface CartContextData {
   cart: CartItem[];
-  addToCart: (product: Product) => void;
+  addToCart: (product: Product, quantity?: number) => void;
   removeFromCart: (productId: string) => void;
   clearCart: () => void;
 }
@@ -29,16 +29,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("@AthleticClub:cart", JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product: Product, quantity: number = 1) => {
     setCart((prevCart) => {
       const productExists = prevCart.find((item) => item.id === product.id);
 
       if (productExists) {
         return prevCart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item
         );
       }
-      return [...prevCart, { ...product, quantity: 1 }];
+      return [...prevCart, { ...product, quantity }];
     });
   };
 
