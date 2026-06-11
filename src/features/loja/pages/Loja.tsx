@@ -4,7 +4,8 @@ import Sidebar from "../../../components/Sidebar";
 import "../styles/Loja.css";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../../contexts/CartContext"; 
-import type { Product } from "../../../contexts/CartContext";
+import type { Product } from "../types/products";
+
 
 export default function Loja() {
   const [products, setProducts] = useState<Product[]>([]);

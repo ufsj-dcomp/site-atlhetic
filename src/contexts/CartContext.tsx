@@ -1,17 +1,8 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 
-//Tipamos o Produto baseado no seu banco
-export interface Product {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  category: string;
-  available: boolean;
-}
+import type { Product } from "../features/loja/types/products"; 
 
-//item do carrinho é um Produto + a Quantidade
 export interface CartItem extends Product {
   quantity: number;
 }
