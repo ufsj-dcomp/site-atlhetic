@@ -5,22 +5,9 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../lib/firebase";
 import Sidebar from "../../../components/Sidebar";
 
+import type { Order } from "../types/order";
 import "../styles/OrderSummary.css";
 
-interface OrderItem {
-  productId: string;
-  name: string;
-  quantity: number;
-  price: number;
-}
-
-interface Order {
-  id: string;
-  userId: string;
-  status: string;
-  total: number | string;
-  items: OrderItem[];
-}
 
 export default function OrderSummary() {
   const navigate = useNavigate();
@@ -105,21 +92,14 @@ export default function OrderSummary() {
                 <p>Pedido sem itens.</p>
               ) : (
                 order.items.map((item, index) => (
-                  <div
-                    key={index}
-                    className="order-item"
-                  >
+                  <div key={index} className="order-item">
                     <div>
                       <h3>{item.name}</h3>
-
-                      <p>
-                        Quantidade: {item.quantity}
-                      </p>
+                      <p>Quantidade: {item.quantity}</p>
                     </div>
 
                     <strong>
-                      R${" "}
-                      {(parseFloat(String(item.price)) * Number(item.quantity)).toFixed(2)}
+                      R$ {(Number(item.price) * Number(item.quantity)).toFixed(2)}
                     </strong>
                   </div>
                 ))
