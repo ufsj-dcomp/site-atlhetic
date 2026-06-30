@@ -1,7 +1,23 @@
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../contexts/CartContext"; 
+import { 
+  FaHome, 
+  FaNewspaper, 
+  FaFutbol, 
+  FaShoppingCart, 
+  FaShoppingBag, 
+  FaTicketAlt, 
+  FaUser 
+} from "react-icons/fa";
 
 export default function Sidebar() {
+  
+  const navigate = useNavigate();
+  const { cart } = useCart();
+  const totalItens = cart.reduce((total, item) => total + item.quantity, 0);
+
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -158,72 +174,68 @@ export default function Sidebar() {
                 : ""
             }`}
           >
-            <span>🏠</span>
+          </div>
+        </a>
+
+        <a href="/home" style={{ textDecoration: "none" }}>
+          <div className={`menu-item ${currentPath === "/home" ? "active" : ""}`}>
+            <FaHome size={20} />
             <span>Home</span>
           </div>
         </a>
 
         <a href="/noticias" style={{ textDecoration: "none" }}>
-          <div
-            className={`menu-item ${
-              currentPath === "/noticias"
-                ? "active"
-                : ""
-            }`}
-          >
-            <span>📰</span>
+          <div className={`menu-item ${currentPath === "/noticias" ? "active" : ""}`}>
+            <FaNewspaper size={20} />
             <span>Notícias</span>
           </div>
         </a>
 
         <a href="/jogos" style={{ textDecoration: "none" }}>
-          <div
-            className={`menu-item ${
-              currentPath === "/jogos"
-                ? "active"
-                : ""
-            }`}
-          >
-            <span>⚽</span>
+          <div className={`menu-item ${currentPath === "/jogos" ? "active" : ""}`}>
+            <FaFutbol size={20} />
             <span>Jogos</span>
           </div>
         </a>
 
         <a href="/loja" style={{ textDecoration: "none" }}>
-          <div
-            className={`menu-item ${
-              currentPath === "/loja"
-                ? "active"
-                : ""
-            }`}
-          >
-            <span>🛒</span>
+          <div className={`menu-item ${currentPath === "/loja" ? "active" : ""}`}>
+            <FaShoppingCart size={20} />
             <span>Loja</span>
           </div>
         </a>
 
+        <a href="/carrinho" style={{ textDecoration: "none" }}>
+          <div className={`menu-item ${currentPath === "/carrinho" ? "active" : ""}`}>
+            <FaShoppingBag size={20} />
+            <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              Carrinho
+              {totalItens > 0 && (
+                <span style={{
+                  background: '#ff4d4d',
+                  color: 'white',
+                  borderRadius: '50%',
+                  padding: '2px 8px',
+                  fontSize: '0.8rem',
+                  fontWeight: 'bold'
+                }}>
+                  {totalItens}
+                </span>
+              )}
+            </span>
+          </div>
+        </a>
+
         <a href="/ingressos" style={{ textDecoration: "none" }}>
-          <div
-            className={`menu-item ${
-              currentPath === "/ingressos"
-                ? "active"
-                : ""
-            }`}
-          >
-            <span>🎫</span>
+          <div className={`menu-item ${currentPath === "/ingressos" ? "active" : ""}`}>
+            <FaTicketAlt size={20} />
             <span>Ingressos</span>
           </div>
         </a>
 
         <a href="/perfil" style={{ textDecoration: "none" }}>
-          <div
-            className={`menu-item ${
-              currentPath === "/perfil"
-                ? "active"
-                : ""
-            }`}
-          >
-            <span>👤</span>
+          <div className={`menu-item ${currentPath === "/perfil" ? "active" : ""}`}>
+            <FaUser size={20} />
             <span>Perfil</span>
           </div>
         </a>
