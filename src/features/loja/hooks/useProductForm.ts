@@ -8,8 +8,8 @@ const defaultProductFormValues: ProductFormValues = {
   price: "",
   image: "",
   category: "",
-  available: true,
   description: "",
+  stock: "0",
 };
 
 export function useProductForm(
@@ -22,12 +22,10 @@ export function useProductForm(
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
     const target = event.target;
-    const isCheckbox =
-      target instanceof HTMLInputElement && target.type === "checkbox";
 
     setValues((current) => ({
       ...current,
-      [target.name]: isCheckbox ? target.checked : target.value,
+      [target.name]: target.value,
     }));
   }
 
@@ -35,13 +33,22 @@ export function useProductForm(
     const nextErrors: FormErrors = {};
 
     if (!currentValues.name.trim()) nextErrors.name = "Informe o nome.";
-    if (!currentValues.price.trim()) nextErrors.price = "Informe o preço.";
-    if (Number.isNaN(Number(currentValues.price))) {
+
+    if (!currentValues.price.trim()) {
+      nextErrors.price = "Informe o preço.";
+    } else if (Number.isNaN(Number(currentValues.price))) {
       nextErrors.price = "O preço precisa ser um número.";
     }
+
     if (!currentValues.image.trim()) nextErrors.image = "Informe a imagem.";
     if (!currentValues.category.trim()) nextErrors.category = "Informe a categoria.";
     if (!currentValues.description.trim()) nextErrors.description = "Informe a descrição.";
+
+    if (!currentValues.stock.trim()) {
+      nextErrors.stock = "Informe a quantidade em estoque.";
+    } else if (!/^\d+$/.test(currentValues.stock.trim())) {
+      nextErrors.stock = "O estoque precisa ser um número inteiro não negativo.";
+    }
 
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;

@@ -6,6 +6,7 @@ export type Product = {
   category: string;
   available: boolean;
   description: string;
+  stock: number;
 };
 
 export type ProductFormValues = {
@@ -13,6 +14,6 @@ export type ProductFormValues = {
   price: string;
   image: string;
   category: string;
-  available: boolean;
   description: string;
+  stock: string;
 };
