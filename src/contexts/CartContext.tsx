@@ -1,24 +1,15 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 
-//Tipamos o Produto baseado no seu banco
-export interface Product {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  category: string;
-  available: boolean;
-}
+import type { Product } from "../features/loja/types/products"; 
 
-//item do carrinho é um Produto + a Quantidade
 export interface CartItem extends Product {
   quantity: number;
 }
 
 interface CartContextData {
   cart: CartItem[];
-  addToCart: (product: Product) => void;
+  addToCart: (product: Product, quantity?: number) => void;
   removeFromCart: (productId: string) => void;
   clearCart: () => void;
 }
@@ -38,16 +29,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("@AthleticClub:cart", JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product: Product, quantity: number = 1) => {
     setCart((prevCart) => {
       const productExists = prevCart.find((item) => item.id === product.id);
 
       if (productExists) {
         return prevCart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item
         );
       }
-      return [...prevCart, { ...product, quantity: 1 }];
+      return [...prevCart, { ...product, quantity }];
     });
   };
 
