@@ -146,7 +146,7 @@ export default function ProdutoDetalhe() {
               onClick={handleComprar}
               disabled={semEstoque}
             >
-              {semEstoque ? "Esgotado" : "Comprar"}
+              {semEstoque ? "Esgotado" : "Adicionar ao carrinho"}
             </button>
           </div>
         </div>
