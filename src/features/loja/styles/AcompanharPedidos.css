@@ -1,0 +1,136 @@
+.pedidos-page {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8f9fa; /* Fundo claro da página */
+}
+
+.pedidos-container {
+  flex: 1;
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-left: 260px; /* Empurra o conteúdo para o lado do Sidebar (240px) */
+  font-family: sans-serif;
+}
+
+.pedidos-title {
+  color: #000000; /* Título em preto */
+  font-size: 28px;
+  margin-top: 0;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #000000; /* Linha preta */
+  padding-bottom: 15px;
+}
+
+/* --- Lista de Pedidos --- */
+.pedidos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pedido-card {
+  background: #e0e0e0; /* Fundo cinza */
+  border: 2px solid #000000; /* Contorno preto */
+  border-radius: 12px;
+  padding: 24px;
+  color: #000000; /* Todo texto base em preto */
+}
+
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #000000; /* Divisão interna preta */
+  padding-bottom: 15px;
+}
+
+.pedido-id {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.pedido-status {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Cores das Badges de Status - Ajustadas para dar leitura no cinza */
+.status-pendente { background: #f59e0b; color: #fff; border: 1px solid #d97706; }
+.status-enviado { background: #3b82f6; color: #fff; border: 1px solid #2563eb; }
+.status-entregue { background: #1F6E3C; color: #fff; border: 1px solid #144b29; }
+.status-cancelado { background: #ef4444; color: #fff; border: 1px solid #dc2626; }
+.status-default { background: #6b7280; color: #fff; border: 1px solid #4b5563; }
+
+.pedido-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  color: #222;
+}
+
+.pedido-info strong {
+  color: #000000;
+}
+
+.pedido-itens {
+  background: #cccccc; /* Um cinza levemente mais escuro para a caixa interna */
+  border: 1px solid #000000;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.pedido-itens strong {
+  display: block;
+  margin-bottom: 12px;
+  color: #000000;
+}
+
+.pedido-itens ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pedido-itens li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dashed #666;
+  font-size: 0.95rem;
+  color: #000000;
+}
+
+.pedido-itens li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.pedido-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #000000;
+}
+
+.pedido-total {
+  font-size: 20px;
+  color: #1F6E3C; 
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .pedidos-container {
+    margin-left: 0;
+    padding-top: 80px;
+  }
+}
