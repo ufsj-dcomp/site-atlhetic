@@ -27,6 +27,9 @@ export function ProductForm({
     await onSubmit(values);
   }
 
+  const stockNumber = Number(values.stock);
+  const willBeAvailable = !Number.isNaN(stockNumber) && stockNumber > 0;
+
   return (
     <form className="admin-product-form" onSubmit={handleSubmit}>
       <div className="admin-product-field">
@@ -67,6 +70,23 @@ export function ProductForm({
       </div>
 
       <div className="admin-product-field">
+        <label htmlFor="stock">Estoque</label>
+        <input
+          id="stock"
+          name="stock"
+          value={values.stock}
+          onChange={onChange}
+          inputMode="numeric"
+        />
+        {errors.stock && <span className="admin-product-error">{errors.stock}</span>}
+        <span className="admin-product-hint">
+          {willBeAvailable
+            ? "Produto ficará disponível para venda."
+            : "Produto ficará indisponível para venda (estoque zerado)."}
+        </span>
+      </div>
+
+      <div className="admin-product-field">
         <label htmlFor="description">Descrição</label>
         <textarea
           id="description"
@@ -79,16 +99,6 @@ export function ProductForm({
           <span className="admin-product-error">{errors.description}</span>
         )}
       </div>
-
-      <label className="admin-product-checkbox">
-        <input
-          type="checkbox"
-          name="available"
-          checked={values.available}
-          onChange={onChange}
-        />
-        Produto disponível
-      </label>
 
       <div className="admin-product-actions">
         {onCancel && (

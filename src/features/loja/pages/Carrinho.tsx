@@ -1,22 +1,50 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../../contexts/CartContext"; 
 import { FaTrash, FaShoppingBag } from "react-icons/fa";
+import { getProductById, decreaseProductStock } from "../services/products";
 import "../styles/Carrinho.css";
 
 export default function Carrinho() {
   const { cart, removeFromCart, clearCart } = useCart();
   const navigate = useNavigate();
+  const [processing, setProcessing] = useState(false);
+  const [stockError, setStockError] = useState<string | null>(null);
 
   const valorTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
-  const handleFinalizarCompra = () => {
+  const handleFinalizarCompra = async () => {
     if (cart.length === 0) return;
-    
-    // Aqui dps tem que redirecionar para uma tela de pagamento
-    // Por enquanto, dá só um aviso de sucesso e limpar o carrinho
-    alert("Compra realizada com sucesso! Vai Athletic!");
-    clearCart();
-    navigate("/loja"); // Volta pra loja
+
+    setProcessing(true);
+    setStockError(null);
+
+    try {
+      for (const item of cart) {
+        const currentProduct = await getProductById(item.id);
+
+        if (!currentProduct || currentProduct.stock < item.quantity) {
+          setStockError(
+            `Estoque insuficiente para "${item.name}". Disponível: ${currentProduct?.stock ?? 0}.`
+          );
+          setProcessing(false);
+          return;
+        }
+      }
+
+      for (const item of cart) {
+        await decreaseProductStock(item.id, item.quantity);
+      }
+
+      clearCart();
+      navigate("/resumo-pedido", {
+        state: { items: cart, total: valorTotal },
+      });
+    } catch {
+      setStockError("Não foi possível concluir a compra. Tente novamente.");
+    } finally {
+      setProcessing(false);
+    }
   };
 
   return (
@@ -68,8 +96,17 @@ export default function Carrinho() {
                 <span>Total:</span>
                 <span className="resumo-total">R$ {valorTotal.toFixed(2).replace('.', ',')}</span>
               </div>
-              <button className="btn-finalizar" onClick={handleFinalizarCompra}>
-                Finalizar Compra
+
+              {stockError && (
+                <p className="carrinho-erro-estoque">{stockError}</p>
+              )}
+
+              <button
+                className="btn-finalizar"
+                onClick={handleFinalizarCompra}
+                disabled={processing}
+              >
+                {processing ? "Processando..." : "Finalizar Compra"}
               </button>
             </div>
           </>

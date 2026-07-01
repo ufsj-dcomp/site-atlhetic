@@ -37,6 +37,7 @@ export function ProductsTable({
             <th>Nome</th>
             <th>Categoria</th>
             <th>Preço</th>
+            <th>Estoque</th>
             <th>Status</th>
             <th>Ações</th>
           </tr>
@@ -55,6 +56,7 @@ export function ProductsTable({
               <td>{product.name}</td>
               <td>{product.category}</td>
               <td>{currencyFormatter.format(product.price)}</td>
+              <td>{product.stock}</td>
               <td>
                 <span
                   className={`admin-product-badge ${

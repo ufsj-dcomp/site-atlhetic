@@ -16,10 +16,9 @@ function EditProductForm({ product }: { product: Product }) {
     price: String(product.price),
     image: product.image,
     category: product.category,
-    available: product.available,
     description: product.description,
+    stock: String(product.stock),
   });
-
   const [saving, setSaving] = useState(false);
 
   async function handleSubmit(formValues: typeof values) {

@@ -23,17 +23,21 @@ function normalizeProduct(id: string, data: Record<string, unknown>): Product {
     category: typeof data.category === "string" ? data.category : "",
     available: typeof data.available === "boolean" ? data.available : true,
     description: typeof data.description === "string" ? data.description : "",
+    stock: Number(data.stock ?? 0),
   };
 }
 
 function toPayload(values: ProductFormValues) {
+  const stock = Number(values.stock);
+
   return {
     name: values.name.trim(),
     price: Number(values.price),
     image: values.image.trim(),
     category: values.category.trim(),
-    available: values.available,
     description: values.description.trim(),
+    stock,
+    available: stock > 0,
     updatedAt: serverTimestamp(),
   };
 }
@@ -91,4 +95,29 @@ export async function updateProduct(
 export async function deleteProduct(id: string): Promise<void> {
   const docRef = doc(db, "products", id);
   await deleteDoc(docRef);
+}
+
+export async function decreaseProductStock(
+  id: string,
+  amount: number
+): Promise<void> {
+  const docRef = doc(db, "products", id);
+  const snapshot = await getDoc(docRef);
+
+  if (!snapshot.exists()) {
+    throw new Error("Produto não encontrado.");
+  }
+
+  const currentStock = Number(snapshot.data().stock ?? 0);
+  const nextStock = currentStock - amount;
+
+  if (nextStock < 0) {
+    throw new Error("Estoque insuficiente.");
+  }
+
+  await updateDoc(docRef, {
+    stock: nextStock,
+    available: nextStock > 0,
+    updatedAt: serverTimestamp(),
+  });
 }
