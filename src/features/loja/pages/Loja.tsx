@@ -133,11 +133,9 @@ export default function Loja() {
 
               <button
                 className="comprar-btn"
-                onClick={() =>
-                  alert("Compra finalizada!")
-                }
+                onClick={() => navigate("/carrinho")}
               >
-                Finalizar Compra
+                Ver carrinho
               </button>
 
               <button

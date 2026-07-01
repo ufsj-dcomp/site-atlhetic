@@ -115,7 +115,7 @@ export default function ProdutoDetalhe() {
             </div>
 
             <button className="comprar-btn" onClick={handleComprar}>
-              Comprar
+              Adicionar ao carrinho
             </button>
           </div>
         </div>
