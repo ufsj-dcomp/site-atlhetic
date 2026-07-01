@@ -1,35 +1,34 @@
 import {
+  addDoc,
   collection,
-  getDocs,
-  doc,
-  updateDoc,
+  serverTimestamp,
 } from "firebase/firestore";
-
 import { db } from "../../../lib/firebase";
-import type { Order } from "../types/order";
 
-export const getFirstOrder = async (): Promise<Order | null> => {
-  const snapshot = await getDocs(collection(db, "orders"));
+export interface OrderItem {
+  productId: string;
+  name: string;
+  quantity: number;
+  price: number;
+}
 
-  if (snapshot.empty) {
-    return null;
-  }
+interface CreateOrderDTO {
+  userId: string;
+  items: OrderItem[];
+  total: number;
+  paymentMethod: string;
+  status: string;
+}
 
-  const firstDoc = snapshot.docs[0];
-
-  return {
-    id: firstDoc.id,
-    ...(firstDoc.data() as Omit<Order, "id">),
-  };
-};
-
-export const updatePaymentMethod = async (
-  orderId: string,
-  paymentMethod: string
-) => {
-  const orderRef = doc(db, "orders", orderId);
-
-  await updateDoc(orderRef, {
-    paymentMethod,
+export async function createOrder(data: CreateOrderDTO) {
+  const docRef = await addDoc(collection(db, "orders"), {
+    userId: data.userId,
+    items: data.items,
+    total: data.total,
+    paymentMethod: data.paymentMethod,
+    status: data.status,
+    createdAt: serverTimestamp(), // 👈 AQUI É O CERTO
   });
-};
+
+  return docRef.id;
+}

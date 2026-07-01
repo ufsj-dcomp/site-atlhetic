@@ -1,19 +1,25 @@
-.carrinho-page {
-  padding: 2rem;
+.carrinho-layout {
   display: flex;
-  justify-content: center;
   min-height: 100vh;
   background-color: #f5f5f5;
-  color: #111;
+}
+
+.carrinho-page {
+  flex: 1;
+  margin-left: 240px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
 }
 
 .carrinho-container {
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
   background: white;
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .carrinho-header {
@@ -23,6 +29,12 @@
   border-bottom: 2px solid #eaeaea;
   padding-bottom: 1rem;
   margin-bottom: 2rem;
+}
+
+.carrinho-header h2 {
+  color: #111;
+  margin: 0;
+  font-size: 1.8rem;
 }
 
 .carrinho-vazio {
@@ -44,6 +56,11 @@
   padding: 1rem;
   border: 1px solid #eaeaea;
   border-radius: 8px;
+  transition: 0.2s;
+}
+
+.carrinho-item:hover {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
 }
 
 .carrinho-item img {
@@ -58,20 +75,21 @@
 }
 
 .item-info h4 {
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.5rem;
   font-size: 1.1rem;
+  color: #111;
 }
 
 .item-categoria {
   font-size: 0.85rem;
   color: #888;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.5rem;
 }
 
 .item-preco {
-  font-weight: bold;
-  color: #1F6E3C; /* Verde do Athletic */
   margin: 0;
+  font-weight: bold;
+  color: #1F6E3C;
 }
 
 .item-acoes {
@@ -81,10 +99,10 @@
 }
 
 .item-quantidade {
-  font-weight: bold;
   background: #eee;
   padding: 0.3rem 0.8rem;
   border-radius: 4px;
+  font-weight: bold;
 }
 
 .btn-remover {
@@ -93,7 +111,7 @@
   color: #ff4d4d;
   font-size: 1.2rem;
   cursor: pointer;
-  transition: color 0.2s;
+  transition: 0.2s;
 }
 
 .btn-remover:hover {
@@ -109,47 +127,79 @@
 .resumo-linha {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 1.2rem;
   margin-bottom: 1.5rem;
 }
 
 .resumo-total {
+  font-size: 1.6rem;
   font-weight: bold;
-  font-size: 1.5rem;
   color: #1F6E3C;
 }
 
-.btn-finalizar, .btn-voltar {
-  width: 100%;
-  padding: 1rem;
+.carrinho-erro-estoque {
+  color: #d32f2f;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.btn-finalizar,
+.btn-voltar {
   border: none;
   border-radius: 6px;
-  font-size: 1.1rem;
+  padding: 1rem;
+  font-size: 1.05rem;
   font-weight: bold;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: 0.2s;
 }
 
 .btn-finalizar {
-  background-color: #111;
+  width: 100%;
+  background: #111;
   color: white;
+}
+
+.btn-finalizar:hover {
+  background: #1F6E3C;
+}
+
+.btn-finalizar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .btn-voltar {
-  background-color: #1F6E3C;
-  color: white;
   margin-top: 1rem;
-  width: auto;
   padding: 0.8rem 2rem;
+  background: #1F6E3C;
+  color: white;
 }
 
-.btn-finalizar:hover, .btn-voltar:hover {
-  opacity: 0.85;
+.btn-voltar:hover {
+  opacity: 0.9;
 }
 
+@media (max-width: 900px) {
 
-.carrinho-header h2 {
-  color: #111;
-  margin: 0;
-  font-size: 1.8rem;
+  .carrinho-page {
+    margin-left: 0;
+    padding: 1rem;
+  }
+
+  .carrinho-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item-acoes {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .carrinho-container {
+    padding: 1.5rem;
+  }
+
 }

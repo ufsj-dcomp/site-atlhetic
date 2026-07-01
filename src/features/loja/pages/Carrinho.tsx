@@ -1,47 +1,57 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../../../contexts/CartContext"; 
+import { useCart } from "../../../contexts/CartContext";
 import { FaTrash, FaShoppingBag } from "react-icons/fa";
-import { getProductById, decreaseProductStock } from "../services/products";
+import Sidebar from "../../../components/Sidebar";
+
+import { getProductById } from "../services/products";
+
 import "../styles/Carrinho.css";
 
 export default function Carrinho() {
-  const { cart, removeFromCart, clearCart } = useCart();
+  const { cart, removeFromCart } = useCart();
   const navigate = useNavigate();
+
   const [processing, setProcessing] = useState(false);
   const [stockError, setStockError] = useState<string | null>(null);
 
-  const valorTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  const valorTotal = cart.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
 
-  const handleFinalizarCompra = async () => {
+  const handleIrPagamento = async () => {
     if (cart.length === 0) return;
 
     setProcessing(true);
     setStockError(null);
 
     try {
+      // valida estoque antes de ir pro pagamento
       for (const item of cart) {
-        const currentProduct = await getProductById(item.id);
+        const product = await getProductById(item.id);
 
-        if (!currentProduct || currentProduct.stock < item.quantity) {
+        if (!product || product.stock < item.quantity) {
           setStockError(
-            `Estoque insuficiente para "${item.name}". Disponível: ${currentProduct?.stock ?? 0}.`
+            `Estoque insuficiente para "${item.name}". Disponível: ${
+              product?.stock ?? 0
+            }`
           );
           setProcessing(false);
           return;
         }
       }
 
-      for (const item of cart) {
-        await decreaseProductStock(item.id, item.quantity);
-      }
-
-      clearCart();
-      navigate("/resumo-pedido", {
-        state: { items: cart, total: valorTotal },
+      // vai para pagamento com os dados do carrinho
+      navigate("/pagamento", {
+        state: {
+          items: cart,
+          total: valorTotal,
+        },
       });
-    } catch {
-      setStockError("Não foi possível concluir a compra. Tente novamente.");
+    } catch (error) {
+      console.error(error);
+      setStockError("Erro ao validar estoque.");
     } finally {
       setProcessing(false);
     }
@@ -49,8 +59,9 @@ export default function Carrinho() {
 
   return (
     <div className="carrinho-page">
+      <Sidebar />
+
       <div className="carrinho-container">
-        
         <div className="carrinho-header">
           <FaShoppingBag size={24} />
           <h2>Meu Carrinho</h2>
@@ -59,6 +70,7 @@ export default function Carrinho() {
         {cart.length === 0 ? (
           <div className="carrinho-vazio">
             <p>Seu carrinho está vazio.</p>
+
             <button className="btn-voltar" onClick={() => navigate("/loja")}>
               Voltar para a Loja
             </button>
@@ -69,19 +81,21 @@ export default function Carrinho() {
               {cart.map((item) => (
                 <div className="carrinho-item" key={item.id}>
                   <img src={item.image} alt={item.name} />
-                  
+
                   <div className="item-info">
                     <h4>{item.name}</h4>
                     <p className="item-categoria">{item.category}</p>
-                    <p className="item-preco">R$ {item.price.toFixed(2).replace('.', ',')}</p>
+                    <p className="item-preco">
+                      R$ {item.price.toFixed(2)}
+                    </p>
                   </div>
 
                   <div className="item-acoes">
-                    <span className="item-quantidade">Qtd: {item.quantity}</span>
-                    <button 
-                      className="btn-remover" 
+                    <span>Qtd: {item.quantity}</span>
+
+                    <button
+                      className="btn-remover"
                       onClick={() => removeFromCart(item.id)}
-                      title="Remover item"
                     >
                       <FaTrash />
                     </button>
@@ -91,10 +105,9 @@ export default function Carrinho() {
             </div>
 
             <div className="carrinho-resumo">
-              <h3>Resumo do Pedido</h3>
               <div className="resumo-linha">
                 <span>Total:</span>
-                <span className="resumo-total">R$ {valorTotal.toFixed(2).replace('.', ',')}</span>
+                <strong>R$ {valorTotal.toFixed(2)}</strong>
               </div>
 
               {stockError && (
@@ -103,10 +116,10 @@ export default function Carrinho() {
 
               <button
                 className="btn-finalizar"
-                onClick={handleFinalizarCompra}
+                onClick={handleIrPagamento}
                 disabled={processing}
               >
-                {processing ? "Processando..." : "Finalizar Compra"}
+                {processing ? "Validando..." : "Ir para Pagamento"}
               </button>
             </div>
           </>
