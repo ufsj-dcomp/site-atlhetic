@@ -22,7 +22,12 @@ import PrivateRoute from "../features/auth/components/PrivateRoute";
 import Profile from "../features/users/pages/Profile";
 
 import OrderSummary from "../features/orders/pages/OrderSummary";
+
 import Payment from "../features/orders/pages/Payment";
+
+import PaymentIngresso from "../features/orders/pages/PaymentIngresso";
+
+
 
 
 import { CreateGame } from "../features/games/pages/CreateGame";
@@ -221,6 +226,11 @@ export default function AppRoutes() {
             <EditProduct />
           </PrivateRoute>
         }
+      />
+
+      <Route
+          path="/pagamento-ingresso"
+          element={<PaymentIngresso />}
       />
 
       <Route path="*" element={<Navigate to="/" replace />} />

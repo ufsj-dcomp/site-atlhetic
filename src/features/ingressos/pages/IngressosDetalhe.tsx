@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../../../components/Sidebar";
 
 import { getIngressosById } from "../services/ingressos";
@@ -8,6 +8,7 @@ import "../styles/IngressosDetalhe.css";
 
 export default function IngressosDetalhe() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [ingresso, setIngresso] = useState<any>(null);
 
@@ -86,7 +87,18 @@ export default function IngressosDetalhe() {
               </h2>
             </div>
 
-            <button className="comprar-btn">
+            <button
+              className="comprar-btn"
+              onClick={() =>
+                navigate("/pagamento-ingresso", {
+                  state: {
+                    ingresso,
+                    quantidade,
+                    total: ingresso.valor * quantidade,
+                  },
+                })
+              }
+            >
               Comprar Ingresso
             </button>
           </div>
