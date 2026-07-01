@@ -38,8 +38,25 @@ export default function ProdutoDetalhe() {
     setShipping(fakeShipping);
   }
 
+  function handleQuantityChange(value: number) {
+    if (!product) return;
+
+    const clamped = Math.min(Math.max(value, 1), Math.max(product.stock, 1));
+    setQuantity(clamped);
+  }
+
   function handleComprar() {
     if (!product) return;
+
+    if (product.stock <= 0) {
+      alert("Produto sem estoque disponível no momento.");
+      return;
+    }
+
+    if (quantity > product.stock) {
+      alert(`Só temos ${product.stock} unidade(s) em estoque.`);
+      return;
+    }
 
     addToCart(product, quantity);
     alert(`${quantity}x ${product.name} adicionado ao carrinho!`);
@@ -48,6 +65,8 @@ export default function ProdutoDetalhe() {
   if (!product) {
     return <h1>Carregando...</h1>;
   }
+
+  const semEstoque = product.stock <= 0;
 
   return (
     <div className="layout">
@@ -70,6 +89,12 @@ export default function ProdutoDetalhe() {
               {currencyFormatter.format(product.price)}
             </h2>
 
+            <p className="produto-estoque">
+              {semEstoque
+                ? "Produto esgotado"
+                : `Em estoque: ${product.stock} unidade(s)`}
+            </p>
+
             <div className="produto-descricao-card">
               <h3>Descrição do Produto</h3>
               <p>{product.description}</p>
@@ -85,8 +110,10 @@ export default function ProdutoDetalhe() {
               <input
                 type="number"
                 min="1"
+                max={product.stock}
                 value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}
+                disabled={semEstoque}
+                onChange={(e) => handleQuantityChange(Number(e.target.value))}
               />
             </div>
 
@@ -114,8 +141,12 @@ export default function ProdutoDetalhe() {
               )}
             </div>
 
-            <button className="comprar-btn" onClick={handleComprar}>
-              Adicionar ao carrinho
+            <button
+              className="comprar-btn"
+              onClick={handleComprar}
+              disabled={semEstoque}
+            >
+              {semEstoque ? "Esgotado" : "Adicionar ao carrinho"}
             </button>
           </div>
         </div>
