@@ -1,79 +1,65 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Sidebar from "../../../components/Sidebar";
+import { useCart } from "../../../contexts/CartContext";
+import { auth } from "../../../lib/firebase";
 
-import {
-  getFirstOrder,
-  updatePaymentMethod,
-} from "../services/orderService";
+import { createOrder } from "../services/orderService";
+import { decreaseProductStock } from "../../loja/services/products";
 
 import "../styles/Payment.css";
 
 export default function Payment() {
   const navigate = useNavigate();
+  const { clearCart } = useCart();
 
-  const [selectedMethod, setSelectedMethod] =
-    useState("");
+  const location = useLocation();
 
-  const [orderId, setOrderId] =
-    useState("");
+  const items = location.state?.items || [];
+  const total = location.state?.total || 0;
 
-  const [total, setTotal] =
-    useState(0);
-
-  useEffect(() => {
-    loadOrder();
-  }, []);
-
-  const loadOrder = async () => {
-    try {
-      const order = await getFirstOrder();
-
-      if (!order) return;
-
-      setOrderId(order.id);
-
-      const totalValue =
-        typeof order.total === "number"
-          ? order.total
-          : parseFloat(
-              String(order.total)
-                .replace("R$", "")
-                .replace(",", ".")
-            );
-
-      setTotal(totalValue);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const [selectedMethod, setSelectedMethod] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleConfirm = async () => {
     if (!selectedMethod) {
-      alert(
-        "Selecione uma forma de pagamento."
-      );
+      alert("Selecione uma forma de pagamento.");
       return;
     }
 
     try {
-      await updatePaymentMethod(
-        orderId,
-        selectedMethod
-      );
+      setLoading(true);
 
-      alert(
-        "Forma de pagamento salva com sucesso!"
-      );
+      const user = auth.currentUser;
+
+      if (!user) {
+        alert("Usuário não autenticado.");
+        return;
+      }
+
+      await createOrder({
+        userId: user.uid,
+        items,
+        total,
+        paymentMethod: selectedMethod,
+        status: "PENDING",
+      });
+
+      for (const item of items) {
+        await decreaseProductStock(item.id, item.quantity);
+      }
+
+      clearCart();
+
+      alert("Compra realizada com sucesso!");
 
       navigate("/home");
     } catch (error) {
       console.error(error);
-
-      alert(
-        "Erro ao salvar forma de pagamento."
-      );
+      alert("Erro ao finalizar compra.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -82,34 +68,22 @@ export default function Payment() {
       <Sidebar />
 
       <div className="payment-content">
-        <button
-          className="back-button"
-          onClick={() => navigate(-1)}
-        >
+        <button className="back-button" onClick={() => navigate(-1)}>
           ← Voltar
         </button>
 
-        <h1>
-          Forma de Pagamento
-        </h1>
+        <h1>Forma de Pagamento</h1>
 
         <div className="payment-card">
-
           <label className="payment-option">
             <input
               type="radio"
               name="payment"
               value="PIX"
-              checked={
-                selectedMethod === "PIX"
-              }
-              onChange={(e) =>
-                setSelectedMethod(
-                  e.target.value
-                )
-              }
+              checked={selectedMethod === "PIX"}
+              onChange={(e) => setSelectedMethod(e.target.value)}
             />
-            PIX
+            <span>PIX</span>
           </label>
 
           <label className="payment-option">
@@ -117,17 +91,10 @@ export default function Payment() {
               type="radio"
               name="payment"
               value="Cartão de Crédito"
-              checked={
-                selectedMethod ===
-                "Cartão de Crédito"
-              }
-              onChange={(e) =>
-                setSelectedMethod(
-                  e.target.value
-                )
-              }
+              checked={selectedMethod === "Cartão de Crédito"}
+              onChange={(e) => setSelectedMethod(e.target.value)}
             />
-            Cartão de Crédito
+            <span>Cartão de Crédito</span>
           </label>
 
           <label className="payment-option">
@@ -135,17 +102,10 @@ export default function Payment() {
               type="radio"
               name="payment"
               value="Cartão de Débito"
-              checked={
-                selectedMethod ===
-                "Cartão de Débito"
-              }
-              onChange={(e) =>
-                setSelectedMethod(
-                  e.target.value
-                )
-              }
+              checked={selectedMethod === "Cartão de Débito"}
+              onChange={(e) => setSelectedMethod(e.target.value)}
             />
-            Cartão de Débito
+            <span>Cartão de Débito</span>
           </label>
 
           <label className="payment-option">
@@ -153,32 +113,19 @@ export default function Payment() {
               type="radio"
               name="payment"
               value="Boleto"
-              checked={
-                selectedMethod ===
-                "Boleto"
-              }
-              onChange={(e) =>
-                setSelectedMethod(
-                  e.target.value
-                )
-              }
+              checked={selectedMethod === "Boleto"}
+              onChange={(e) => setSelectedMethod(e.target.value)}
             />
-            Boleto Bancário
+            <span>Boleto Bancário</span>
           </label>
 
           <div className="payment-total">
             <span>Total:</span>
-
-            <strong>
-              R$ {total.toFixed(2)}
-            </strong>
+            <strong>R$ {total.toFixed(2)}</strong>
           </div>
 
-          <button
-            className="confirm-payment"
-            onClick={handleConfirm}
-          >
-            Confirmar Pagamento
+          <button className="confirm-payment" onClick={handleConfirm} disabled={loading}>
+            {loading ? "Processando..." : "Confirmar Pagamento"}
           </button>
         </div>
       </div>
