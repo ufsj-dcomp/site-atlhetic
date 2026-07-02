@@ -27,6 +27,16 @@
   padding-bottom: 12px;
 }
 
+.back-button {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+
+
 .info-item {
   font-size: 16px;
   padding: 10px 0;
