@@ -43,7 +43,7 @@ export default function Payment() {
         items,
         total,
         paymentMethod: selectedMethod,
-        status: "PENDING",
+        status: "pendente",
       });
 
       for (const item of items) {

@@ -32,6 +32,8 @@ import { CreateNews } from "../features/news/pages/CreateNews";
 import { AdminProducts } from "../features/loja/pages/admin/AdminProducts";
 import { CreateProduct } from "../features/loja/pages/admin/CreateProduct";
 import { EditProduct } from "../features/loja/pages/admin/EditProduct";
+import { AdminOrders } from "../features/orders/pages/admin/AdminOrders";
+import { OrderDetail } from "../features/orders/pages/admin/OrderDetail";
 
 export default function AppRoutes() {
   return (
@@ -219,6 +221,24 @@ export default function AppRoutes() {
         element={
           <PrivateRoute>
             <EditProduct />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/admin/pedidos"
+        element={
+          <PrivateRoute>
+            <AdminOrders />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/admin/pedidos/:id"
+        element={
+          <PrivateRoute>
+            <OrderDetail />
           </PrivateRoute>
         }
       />

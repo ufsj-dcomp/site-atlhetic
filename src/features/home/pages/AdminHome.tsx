@@ -5,6 +5,7 @@ import {
   FaUserShield,
   FaNewspaper,
   FaBoxOpen,
+  FaClipboardList,
 } from "react-icons/fa";
 import "../styles/AdminHome.css";
 
@@ -45,6 +46,15 @@ export function AdminHome() {
       path: "/admin/produtos",
       colorBg: "#dcfce7",
       colorIcon: "#166534",
+    },
+    {
+      id: "manage-orders",
+      title: "Gerenciar Pedidos",
+      description: "Consulte pedidos e atualize o status de cada venda.",
+      icon: <FaClipboardList />,
+      path: "/admin/pedidos",
+      colorBg: "#fee2e2",
+      colorIcon: "#b91c1c",
     },
   ];
 

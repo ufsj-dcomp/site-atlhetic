@@ -1,0 +1,86 @@
+.admin-orders-clients {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-orders-client-group {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.admin-orders-client-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: white;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: #111;
+  font-size: 15px;
+}
+
+.admin-orders-client-header:hover {
+  background: #fafafa;
+}
+
+.admin-orders-client-name {
+  font-weight: 600;
+  flex: 1;
+}
+
+.admin-orders-client-count {
+  color: #777;
+  font-size: 13px;
+}
+
+.admin-orders-client-orders {
+  border-top: 1px solid #eee;
+  padding: 8px 20px 16px 44px;
+}
+
+.admin-order-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  color: #333;
+}
+
+.admin-order-row:last-child {
+  border-bottom: none;
+}
+
+.admin-order-row-id {
+  font-weight: 600;
+  min-width: 90px;
+}
+
+.admin-order-row-date {
+  color: #777;
+  min-width: 140px;
+}
+
+.admin-order-row-total {
+  font-weight: 600;
+  min-width: 100px;
+}
+
+.admin-order-badge {
+  background: #dcfce7;
+  color: #166534;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.admin-order-row .admin-button {
+  margin-left: auto;
+}
