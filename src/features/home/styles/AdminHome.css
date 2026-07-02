@@ -82,3 +82,33 @@
   line-height: 1.5;
   margin: 0;
 }
+
+.admin-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.admin-tab-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 12px 20px;
+  font-size: 15px;
+  color: #666;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.admin-tab-button:hover {
+  color: #111;
+}
+
+.admin-tab-button-active {
+  color: #166534;
+  border-bottom-color: #166534;
+  font-weight: 600;
+}

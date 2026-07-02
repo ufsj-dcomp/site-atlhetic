@@ -27,9 +27,6 @@ import Payment from "../features/orders/pages/Payment";
 
 import PaymentIngresso from "../features/orders/pages/PaymentIngresso";
 
-
-
-
 import { CreateGame } from "../features/games/pages/CreateGame";
 import { AdminHome } from "../features/home/pages/AdminHome";
 import { ManageGames } from "../features/games/components/ManageGames";
@@ -37,6 +34,8 @@ import { CreateNews } from "../features/news/pages/CreateNews";
 import { AdminProducts } from "../features/loja/pages/admin/AdminProducts";
 import { CreateProduct } from "../features/loja/pages/admin/CreateProduct";
 import { EditProduct } from "../features/loja/pages/admin/EditProduct";
+import { AdminOrders } from "../features/orders/pages/admin/AdminOrders";
+import { OrderDetail } from "../features/orders/pages/admin/OrderDetail";
 import { HistoricoCompras } from '../features/loja/pages/HistoricoCompras';
 import { DetalheIngresso } from '../features/loja/pages/DetalheIngresso'; 
 import { AcompanharPedidos } from '../features/loja/pages/AcompanharPedidos';
@@ -240,8 +239,30 @@ export default function AppRoutes() {
       />
 
       <Route
-          path="/pagamento-ingresso"
-          element={<PaymentIngresso />}
+        path="/admin/pedidos"
+        element={
+          <PrivateRoute>
+            <AdminOrders />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/admin/pedidos/:id"
+        element={
+          <PrivateRoute>
+            <OrderDetail />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/pagamento-ingresso"
+        element={
+          <PrivateRoute>
+            <PaymentIngresso />
+          </PrivateRoute>
+        }
       />
       <Route 
         path="/historico-compras" 

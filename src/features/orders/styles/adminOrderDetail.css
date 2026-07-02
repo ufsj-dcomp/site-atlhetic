@@ -1,0 +1,78 @@
+.admin-order-detail-card,
+.admin-order-status-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  color: #333;
+}
+
+.admin-order-detail-card h2,
+.admin-order-status-card h2 {
+  margin: 0 0 16px 0;
+  color: #111;
+}
+
+.admin-order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-order-item h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #111;
+}
+
+.admin-order-item p {
+  margin: 4px 0 0 0;
+  color: #777;
+  font-size: 14px;
+}
+
+.admin-order-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 2px solid #eee;
+  font-size: 18px;
+  font-weight: bold;
+  color: #111;
+}
+
+.admin-order-payment,
+.admin-order-date {
+  margin-top: 12px;
+  color: #555;
+}
+
+.admin-order-status-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.admin-order-status-field select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: white;
+  color: #111;
+}
+
+.admin-order-error {
+  color: #c0392b;
+  margin-bottom: 12px;
+}
+
+.admin-order-success {
+  color: #166534;
+  margin-bottom: 12px;
+}

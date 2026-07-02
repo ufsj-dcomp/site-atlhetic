@@ -12,4 +12,5 @@ export interface Order {
   total: number | string;
   items: OrderItem[];
   paymentMethod?: string;
+  createdAt?: string;
 }
