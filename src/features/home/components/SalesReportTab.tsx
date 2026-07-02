@@ -1,4 +1,5 @@
 import { useSalesReport } from "../../orders/hooks/useSalesReport";
+import { TicketSalesReportSection } from "./TicketSalesReportSection";
 import "../styles/SalesReportTab.css";
 
 const currencyFormatter = new Intl.NumberFormat("pt-BR", {
@@ -16,11 +17,11 @@ const STATUS_COLORS: Record<string, string> = {
   pago: "#166534",
 };
 
-export function SalesReportTab() {
+function ProductSalesReportSection() {
   const { report, loading, error } = useSalesReport();
 
   if (loading) {
-    return <div className="sales-report-empty">Carregando relatório...</div>;
+    return <div className="sales-report-empty">Carregando produtos...</div>;
   }
 
   if (error || !report) {
@@ -35,7 +36,9 @@ export function SalesReportTab() {
   const maxCount = Math.max(...statusEntries.map(([, count]) => count), 1);
 
   return (
-    <div className="sales-report">
+    <div className="sales-report-section">
+      <h2 className="sales-report-section-title">Vendas de Produtos</h2>
+
       <div className="sales-report-cards">
         <div className="sales-report-card">
           <span className="sales-report-card-label">Total de Pedidos</span>
@@ -62,7 +65,7 @@ export function SalesReportTab() {
       </div>
 
       <div className="sales-report-chart-card">
-        <h2>Pedidos por Status</h2>
+        <h3>Pedidos por Status</h3>
 
         {statusEntries.length === 0 ? (
           <p>Nenhum pedido encontrado.</p>
@@ -90,6 +93,15 @@ export function SalesReportTab() {
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+export function SalesReportTab() {
+  return (
+    <div className="sales-report-grid">
+      <ProductSalesReportSection />
+      <TicketSalesReportSection />
     </div>
   );
 }

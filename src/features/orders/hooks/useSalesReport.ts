@@ -9,6 +9,15 @@ export interface SalesReport {
   ordersByStatus: Record<string, number>;
 }
 
+const LEGACY_STATUS_ALIASES: Record<string, string> = {
+  PENDING: "pendente",
+  PAID: "pago",
+};
+
+function normalizeStatus(status: string): string {
+  return LEGACY_STATUS_ALIASES[status] ?? status;
+}
+
 function toNumber(total: Order["total"]): number {
   return typeof total === "number" ? total : Number(total) || 0;
 }
@@ -30,7 +39,7 @@ export function useSalesReport() {
         let paidCount = 0;
 
         for (const order of orders) {
-          const status = order.status || "desconhecido";
+          const status = normalizeStatus(order.status || "desconhecido");
           ordersByStatus[status] = (ordersByStatus[status] ?? 0) + 1;
 
           if (status === "pago") {

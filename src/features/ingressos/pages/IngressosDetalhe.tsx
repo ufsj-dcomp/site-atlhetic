@@ -1,29 +1,24 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../../../components/Sidebar";
-
 import { getIngressosById } from "../services/ingressos";
-
+import type { Ingresso } from "../types/ingressos";
 import "../styles/IngressosDetalhe.css";
 
 export default function IngressosDetalhe() {
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const [ingresso, setIngresso] = useState<any>(null);
-
+  const [ingresso, setIngresso] = useState<Ingresso | null>(null);
   const [quantidade, setQuantidade] = useState(1);
 
   useEffect(() => {
     async function loadIngresso() {
       if (!id) return;
-
       const data = await getIngressosById(id);
-
       setIngresso(data);
     }
 
-    loadIngresso();
+    void loadIngresso();
   }, [id]);
 
   if (!ingresso) {
@@ -35,14 +30,9 @@ export default function IngressosDetalhe() {
   return (
     <div className="layout">
       <Sidebar />
-
       <div className="ingresso-container">
         <div className="ingresso-content">
-
-          <button
-            className="back-button"
-            onClick={() => navigate(-1)}
-          >
+          <button className="back-button" onClick={() => navigate(-1)}>
             ← Voltar
           </button>
 
@@ -52,16 +42,12 @@ export default function IngressosDetalhe() {
             <div className="info-item">
               <strong>Adversário:</strong> {ingresso.opponent}
             </div>
-
             <div className="info-item">
               <strong>Local:</strong> {ingresso.location}
             </div>
-
             <div className="info-item">
-              <strong>Data:</strong>{" "}
-              {gameDate.toLocaleDateString("pt-BR")}
+              <strong>Data:</strong> {gameDate.toLocaleDateString("pt-BR")}
             </div>
-
             <div className="info-item">
               <strong>Horário:</strong>{" "}
               {gameDate.toLocaleTimeString("pt-BR", {
@@ -69,29 +55,23 @@ export default function IngressosDetalhe() {
                 minute: "2-digit",
               })}
             </div>
-
             <div className="info-item">
               <strong>Valor do ingresso:</strong> R$ {ingresso.valor}
             </div>
 
             <div className="campo">
               <label>Quantidade</label>
-
               <input
                 type="number"
                 min="1"
                 value={quantidade}
-                onChange={(e) =>
-                  setQuantidade(Number(e.target.value))
-                }
+                onChange={(e) => setQuantidade(Number(e.target.value))}
               />
             </div>
 
             <div className="info-item">
               <strong>Total:</strong>
-              <h2>
-                R$ {(ingresso.valor * quantidade).toFixed(2)}
-              </h2>
+              <h2>R$ {(ingresso.valor * quantidade).toFixed(2)}</h2>
             </div>
 
             <button
@@ -109,7 +89,6 @@ export default function IngressosDetalhe() {
               Comprar Ingresso
             </button>
           </div>
-
         </div>
       </div>
     </div>
