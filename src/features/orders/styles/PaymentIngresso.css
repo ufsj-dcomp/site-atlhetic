@@ -1,0 +1,140 @@
+.payment-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.payment-content {
+  flex: 1;
+  margin-left: 240px;
+  padding: 40px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+
+.payment-content h1 {
+  color: #111;
+  font-size: 32px;
+  margin-bottom: 24px;
+}
+
+.payment-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 700px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.payment-card h2 {
+  margin-bottom: 16px;
+}
+
+.payment-card p {
+  margin: 8px 0;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 18px;
+  margin-bottom: 16px;
+
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.payment-option:hover {
+  border-color: #1F6E3C;
+  background: #f8fff9;
+}
+
+.payment-option input {
+  width: 18px;
+  height: 18px;
+}
+
+.payment-total {
+  margin-top: 30px;
+  padding-top: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-top: 1px solid #ddd;
+
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* ---------- BOTÕES ---------- */
+
+.payment-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 30px;
+  align-items: stretch;
+}
+
+.payment-buttons button {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 52px;
+
+  margin: 0;
+  padding: 0;
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  color: white;
+  cursor: pointer;
+
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.cancel-payment {
+  background: #d9534f;
+}
+
+.cancel-payment:hover {
+  background: #c9302c;
+}
+
+.confirm-payment {
+  background: #1F6E3C;
+}
+
+.confirm-payment:hover {
+  background: #145a32;
+}
+
+.confirm-payment:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+.cancel-payment:active,
+.confirm-payment:active {
+  transform: scale(0.98);
+}
