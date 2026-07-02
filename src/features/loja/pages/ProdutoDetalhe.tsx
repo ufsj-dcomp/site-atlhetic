@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useCart } from "../../../contexts/CartContext";
 import Sidebar from "../../../components/Sidebar";
 import { getProductById } from "../services/products";
@@ -13,6 +13,7 @@ const currencyFormatter = new Intl.NumberFormat("pt-BR", {
 
 export default function ProdutoDetalhe() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { addToCart } = useCart();
 
   const [product, setProduct] = useState<Product | null>(null);
@@ -74,6 +75,14 @@ export default function ProdutoDetalhe() {
 
       <div className="produto-container">
         <div className="produto-content">
+
+          <button
+            className="back-button"
+            onClick={() => navigate(-1)}
+          >
+            ← Voltar
+          </button>
+
           <div className="produto-carousel">
             <img
               src={product.image}
