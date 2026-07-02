@@ -7,6 +7,7 @@ import Games from "../features/games/pages/Games";
 import GameDetails from "../features/games/pages/GameDetails";
 
 import News from "../features/news/pages/News";
+import NewsDetail from "../features/news/pages/NewsDetail";
 
 import Loja from "../features/loja/pages/Loja";
 import ProdutoDetalhe from "../features/loja/pages/ProdutoDetalhe";
@@ -90,6 +91,15 @@ export default function AppRoutes() {
         }
       />
 
+      <Route
+        path="/noticias/:id"
+        element={
+         <PrivateRoute>
+          <NewsDetail />
+         </PrivateRoute>
+        }
+      />
+      
       <Route
         path="/ingressos"
         element={

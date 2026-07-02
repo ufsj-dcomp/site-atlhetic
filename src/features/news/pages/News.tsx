@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Sidebar from "../../../components/Sidebar";
 
@@ -13,6 +14,8 @@ type News = NewsData & {
 };
 
 export default function News() {
+  const navigate = useNavigate();
+
   const [news, setNews] = useState<News[]>([]);
 
   useEffect(() => {
@@ -54,9 +57,7 @@ export default function News() {
               />
 
               <div className="news-body">
-                <h3>
-                  {item.title}
-                </h3>
+                <h3>{item.title}</h3>
 
                 <p className="news-date">
                   {item.publishedAt?.toDate
@@ -68,7 +69,12 @@ export default function News() {
                     : "Sem data"}
                 </p>
 
-                <button className="read-more">
+                <button
+                  className="read-more"
+                  onClick={() =>
+                    navigate(`/noticias/${item.id}`)
+                  }
+                >
                   Ler mais
                 </button>
               </div>
