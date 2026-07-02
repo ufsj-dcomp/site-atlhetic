@@ -89,7 +89,7 @@ export default function IngressosDetalhe() {
 
             <div className="info-item">
               <strong>Total:</strong>
-              <h2>
+              <h2 className="ingresso-total-valor">
                 R$ {(ingresso.valor * quantidade).toFixed(2)}
               </h2>
             </div>

@@ -1,6 +1,5 @@
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/CartContext"; 
 import { 
   FaHome, 
@@ -10,12 +9,11 @@ import {
   FaShoppingBag, 
   FaTicketAlt, 
   FaUser,
-  FaClipboardList
+  FaHistory
 } from "react-icons/fa";
 
 export default function Sidebar() {
   
-  const navigate = useNavigate();
   const { cart } = useCart();
   const totalItens = cart.reduce((total, item) => total + item.quantity, 0);
 
@@ -227,10 +225,10 @@ export default function Sidebar() {
           </div>
         </a>
 
-        <a href="/meus-pedidos" style={{ textDecoration: "none" }}>
-          <div className={`menu-item ${currentPath === "/meus-pedidos" ? "active" : ""}`}>
-            <FaClipboardList size={20} />
-            <span>Meus Pedidos</span>
+        <a href="/historico-compras" style={{ textDecoration: "none" }}>
+          <div className={`menu-item ${currentPath === "/historico-compras" ? "active" : ""}`}>
+            <FaHistory size={20} />
+            <span>Histórico de Compras</span>
           </div>
         </a>
 

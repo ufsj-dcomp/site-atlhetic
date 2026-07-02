@@ -37,6 +37,8 @@ import { CreateNews } from "../features/news/pages/CreateNews";
 import { AdminProducts } from "../features/loja/pages/admin/AdminProducts";
 import { CreateProduct } from "../features/loja/pages/admin/CreateProduct";
 import { EditProduct } from "../features/loja/pages/admin/EditProduct";
+import { HistoricoCompras } from '../features/loja/pages/HistoricoCompras';
+import { DetalheIngresso } from '../features/loja/pages/DetalheIngresso'; 
 import { AcompanharPedidos } from '../features/loja/pages/AcompanharPedidos';
 
 export default function AppRoutes() {
@@ -241,6 +243,21 @@ export default function AppRoutes() {
           path="/pagamento-ingresso"
           element={<PaymentIngresso />}
       />
+      <Route 
+        path="/historico-compras" 
+        element={ 
+          <PrivateRoute>
+            <HistoricoCompras />
+          </PrivateRoute>
+        } />
+
+        <Route 
+          path="/detalhe-ingresso/:id" 
+          element={
+            <PrivateRoute>
+              <DetalheIngresso />
+            </PrivateRoute>
+          } />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

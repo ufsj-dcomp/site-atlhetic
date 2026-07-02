@@ -164,3 +164,12 @@
     border-radius: 22px;
   }
 }
+
+.input-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666; 
+  margin-right: 10px; 
+  font-size: 1.1rem;
+}
