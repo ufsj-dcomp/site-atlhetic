@@ -138,3 +138,7 @@
 .confirm-payment:active {
   transform: scale(0.98);
 }
+
+.ingresso-titulo {
+  color: #1F6E3C; 
+}

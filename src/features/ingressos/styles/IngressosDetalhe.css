@@ -8,6 +8,7 @@
 .ingresso-content {
   width: 100%;
   max-width: 700px;
+  color: #111;
 }
 
 .ingresso-info {
@@ -18,43 +19,47 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  color: #111;
 }
 
 .ingresso-info h1 {
   margin-bottom: 10px;
   color: #1F6E3C;
-  border-bottom: 2px solid #eee;
+  border-bottom: 2px solid #494646;
   padding-bottom: 12px;
 }
 
 .info-item {
   font-size: 16px;
   padding: 10px 0;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #504d4d;
+  color: #111;
 }
 
 .info-item:last-child {
   border-bottom: none;
+  color: #111;
 }
 
 .campo {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  color: #111;
 }
 
 .campo input {
   width: 100px;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #030303;
+  border: 1px solid #ffffff;
 }
 
 .comprar-btn {
   margin-top: 15px;
   padding: 14px;
   background: #1F6E3C;
-  color: white;
+  color: rgb(255, 255, 255);
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -64,4 +69,8 @@
 
 .comprar-btn:hover {
   background: #145a32;
+}
+
+.ingresso-total-valor {
+  color: #000000; 
 }

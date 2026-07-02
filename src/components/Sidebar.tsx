@@ -9,7 +9,8 @@ import {
   FaShoppingCart, 
   FaShoppingBag, 
   FaTicketAlt, 
-  FaUser 
+  FaUser,
+  FaHistory
 } from "react-icons/fa";
 
 export default function Sidebar() {
@@ -223,6 +224,13 @@ export default function Sidebar() {
                 </span>
               )}
             </span>
+          </div>
+        </a>
+
+        <a href="/historico-compras" style={{ textDecoration: "none" }}>
+          <div className={`menu-item ${currentPath === "/historico-compras" ? "active" : ""}`}>
+            <FaHistory size={20} />
+            <span>Histórico de Compras</span>
           </div>
         </a>
 
