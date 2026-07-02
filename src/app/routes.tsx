@@ -39,6 +39,8 @@ import { CreateProduct } from "../features/loja/pages/admin/CreateProduct";
 import { EditProduct } from "../features/loja/pages/admin/EditProduct";
 import { HistoricoCompras } from '../features/loja/pages/HistoricoCompras';
 import { DetalheIngresso } from '../features/loja/pages/DetalheIngresso'; 
+import { AcompanharPedidos } from '../features/loja/pages/AcompanharPedidos';
+
 export default function AppRoutes() {
   return (
     <Routes>
@@ -227,6 +229,14 @@ export default function AppRoutes() {
             <EditProduct />
           </PrivateRoute>
         }
+      />
+      <Route 
+        path="/meus-pedidos" 
+        element={
+          <PrivateRoute>
+            <AcompanharPedidos />
+          </PrivateRoute>
+        } 
       />
 
       <Route

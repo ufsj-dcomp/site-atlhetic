@@ -39,6 +39,13 @@ export default function IngressosDetalhe() {
       <div className="ingresso-container">
         <div className="ingresso-content">
 
+          <button
+            className="back-button"
+            onClick={() => navigate(-1)}
+          >
+            ← Voltar
+          </button>
+
           <div className="ingresso-info">
             <h1>{ingresso.title}</h1>
 

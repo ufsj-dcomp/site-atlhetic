@@ -1,6 +1,5 @@
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/CartContext"; 
 import { 
   FaHome, 
@@ -15,7 +14,6 @@ import {
 
 export default function Sidebar() {
   
-  const navigate = useNavigate();
   const { cart } = useCart();
   const totalItens = cart.reduce((total, item) => total + item.quantity, 0);
 
