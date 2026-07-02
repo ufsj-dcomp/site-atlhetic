@@ -9,7 +9,8 @@ import {
   FaShoppingCart, 
   FaShoppingBag, 
   FaTicketAlt, 
-  FaUser 
+  FaUser,
+  FaClipboardList
 } from "react-icons/fa";
 
 export default function Sidebar() {
@@ -223,6 +224,13 @@ export default function Sidebar() {
                 </span>
               )}
             </span>
+          </div>
+        </a>
+
+        <a href="/meus-pedidos" style={{ textDecoration: "none" }}>
+          <div className={`menu-item ${currentPath === "/meus-pedidos" ? "active" : ""}`}>
+            <FaClipboardList size={20} />
+            <span>Meus Pedidos</span>
           </div>
         </a>
 

@@ -17,3 +17,19 @@ export type ProductFormValues = {
   description: string;
   stock: string;
 };
+
+export interface ItemPedido {
+  id: string;
+  nome: string;
+  quantidade: number;
+  preco: number;
+}
+
+export interface Pedido {
+  id: string;
+  userId: string;
+  data: Date;
+  status: 'Pendente' | 'Processando' | 'Enviado' | 'Entregue' | 'Cancelado';
+  total: number;
+  itens: ItemPedido[];
+}
