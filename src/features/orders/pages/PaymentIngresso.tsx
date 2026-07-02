@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { collection, addDoc } from "firebase/firestore";
+import { db, auth } from "../../../lib/firebase"; 
 
 import Sidebar from "../../../components/Sidebar";
 
@@ -24,16 +26,36 @@ export default function PaymentIngresso() {
       return;
     }
 
+    if (!auth.currentUser) {
+      alert("Você precisa estar logado para finalizar a compra.");
+      return;
+    }
+
     setLoading(true);
 
-    // Aqui futuramente você salva no Firebase
+    try {
+      await addDoc(collection(db, "ingressos_comprados"), {
+        userId: auth.currentUser.uid,
+        ingressoId: ingresso.id || "ID_NAO_INFORMADO",
+        title: ingresso.title,
+        dateTime: ingresso.dateTime,
+        quantidade: quantidade,
+        valor: ingresso.valor,
+        total: total,
+        paymentMethod: selectedMethod,
+        status: "DELIVERED", 
+        createdAt: new Date(),
+      });
 
-    setTimeout(() => {
       alert("Ingresso comprado com sucesso!");
+      navigate("/historico-compras"); 
 
-      navigate("/home");
-
-    }, 1200);
+    } catch (error) {
+      console.error("Erro ao salvar o ingresso:", error);
+      alert("Houve um erro ao processar seu pagamento. Tente novamente.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -53,7 +75,7 @@ export default function PaymentIngresso() {
 
         <div className="payment-card">
 
-          <h2>{ingresso.title}</h2>
+          <h2 className="ingresso-titulo">{ingresso.title}</h2>
 
           <p>
             Quantidade: <strong>{quantidade}</strong>

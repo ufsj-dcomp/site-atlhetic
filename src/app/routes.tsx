@@ -36,6 +36,8 @@ import { CreateProduct } from "../features/loja/pages/admin/CreateProduct";
 import { EditProduct } from "../features/loja/pages/admin/EditProduct";
 import { AdminOrders } from "../features/orders/pages/admin/AdminOrders";
 import { OrderDetail } from "../features/orders/pages/admin/OrderDetail";
+import { HistoricoCompras } from '../features/loja/pages/HistoricoCompras';
+import { DetalheIngresso } from '../features/loja/pages/DetalheIngresso'; 
 import { AcompanharPedidos } from '../features/loja/pages/AcompanharPedidos';
 
 export default function AppRoutes() {
@@ -262,6 +264,21 @@ export default function AppRoutes() {
           </PrivateRoute>
         }
       />
+      <Route 
+        path="/historico-compras" 
+        element={ 
+          <PrivateRoute>
+            <HistoricoCompras />
+          </PrivateRoute>
+        } />
+
+        <Route 
+          path="/detalhe-ingresso/:id" 
+          element={
+            <PrivateRoute>
+              <DetalheIngresso />
+            </PrivateRoute>
+          } />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

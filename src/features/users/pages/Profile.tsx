@@ -3,6 +3,7 @@ import { useAuth } from "../../auth/context/useAuth";
 import { getUserProfile, updateUserProfile, type UserProfile } from "../services/userService";
 import "./Profile.css";
 import { useNavigate } from "react-router-dom";
+import { FaUser, FaEnvelope, FaPhone, FaIdCard, FaCalendarAlt } from "react-icons/fa";
 
 function validateCPF(cpf: string) {
   return /^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(cpf);
@@ -108,7 +109,7 @@ export default function Profile() {
           <label>
             Nome
             <div className="input-wrap">
-              <span className="input-icon">👤</span>
+              <span className="input-icon"><FaUser /></span>
               <input
                 type="text"
                 placeholder="Seu nome"
@@ -122,7 +123,7 @@ export default function Profile() {
           <label>
             Email
             <div className="input-wrap input-wrap--disabled">
-              <span className="input-icon">✉️</span>
+              <span className="input-icon"><FaEnvelope /></span>
               <input type="email" value={profile?.email || ""} disabled />
             </div>
           </label>
@@ -130,7 +131,7 @@ export default function Profile() {
           <label>
             Telefone
             <div className="input-wrap">
-              <span className="input-icon">📱</span>
+              <span className="input-icon"><FaPhone /></span>
               <input
                 type="text"
                 placeholder="(99) 99999-9999"
@@ -143,7 +144,7 @@ export default function Profile() {
           <label>
             CPF
             <div className="input-wrap">
-              <span className="input-icon">🪪</span>
+              <span className="input-icon"><FaIdCard /></span>
               <input
                 type="text"
                 placeholder="000.000.000-00"
@@ -156,7 +157,7 @@ export default function Profile() {
           <label>
             Data de nascimento
             <div className="input-wrap">
-              <span className="input-icon">📅</span>
+              <span className="input-icon"><FaCalendarAlt /></span>
               <input
                 type="date"
                 value={birthDate}
