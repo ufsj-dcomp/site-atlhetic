@@ -118,9 +118,9 @@ body {
 
 
         .loja-wrapper{
-    display:flex;
-    gap:30px;
-    align-items:flex-start;
+          display:flex;
+          gap:30px;
+          align-items:flex-start;
         }
 
         .content{
@@ -140,6 +140,7 @@ body {
 
         .cart-sidebar h2{
             margin-bottom:20px;
+            color: #000;
         }
 
         .cart-items{
@@ -194,12 +195,18 @@ body {
             justify-content:space-between;
             align-items:center;
             margin:20px 0;
+            color: #000;
+        }
+        .cart-total h2,
+        .cart-total h3 {
+            color: #000;
+            margin: 0;
         }
 
         .clear-cart-btn{
             width:100%;
             margin-top:10px;
-            background:#666;
+            background:#000000;
             color:white;
             border:none;
             padding:12px;
@@ -208,7 +215,7 @@ body {
         }
 
         .clear-cart-btn:hover{
-            background:#444;
+            background:#000000;
         }
 
         .comprar-btn{
