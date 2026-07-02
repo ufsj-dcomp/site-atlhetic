@@ -290,6 +290,15 @@ export default function AppRoutes() {
             </PrivateRoute>
           } />
 
+          <Route
+            path="/noticias/:id"
+            element={
+              <PrivateRoute>
+                <NewsDetail />
+              </PrivateRoute>
+            }
+          />
+
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
